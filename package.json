@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "deploy": "sls deploy --profile xpeppers-develop"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/dallagi/timetableless#readme",
   "devDependencies": {
+    "mocha": "^7.0.1",
     "serverless": "^1.63.0"
   }
 }
