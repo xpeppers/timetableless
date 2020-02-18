@@ -3,6 +3,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-1
+  memorySize: 256
 
 # you can overwrite defaults here
 #  stage: dev
@@ -13,7 +14,7 @@ provider:
     - Effect: "Allow"
       Action:
         - "dynamodb:*"
-      Resource: arn:aws:dynamodb:eu-west-1:*:table/registrations
+      Resource: arn:aws:dynamodb:eu-west-1:*:table/*
 
 # you can define service wide environment variables here
 #  environment:
