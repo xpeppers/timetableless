@@ -9,20 +9,11 @@ provider:
 #  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:*"
+      Resource: arn:aws:dynamodb:eu-west-1:*:table/registrations
 
 # you can define service wide environment variables here
 #  environment:
@@ -44,6 +35,25 @@ functions:
       - http:
           path: hello
           method: get
+resources:
+  Resources:
+    registrations:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: registrations
+        AttributeDefinitions:
+          - AttributeName: timeSlot
+            AttributeType: S
+          - AttributeName: trainNumber
+            AttributeType: S
+        KeySchema:
+          - AttributeName: timeSlot
+            KeyType: HASH
+          - AttributeName: trainNumber
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -85,13 +95,4 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+
