@@ -14,31 +14,6 @@ function parseElement(element) {
   }
 }
 
-// function registrations() {
-//   return new Promise((resolve, reject) => {
-//     var tableName = 'registrations'
-//     var params = {
-//       RequestItems: {
-//         'registrations': {
-//           Keys: [
-//             {'timeSlot': {S: '12:02'},
-//              'trainNumber': {S: 'S001'}},
-//             {'timeSlot': {S: '12:16'},
-//             'trainNumber': {S: 'S001'}}
-//           ],
-//           ProjectionExpression: 'timeSlot, trainNumber, delay, departureStation, departureTime, peopleToNotify'
-//         }
-//       }
-//     };
-//     dynamoDb.batchGetItem(params, function(err, data) {
-//       if (err) {
-//         reject(err)
-//       } else {
-//         resolve(data.Responses[tableName].map(parseElement))
-//       }
-//     })
-//   })
-// }
 function registrations() {
   return new Promise((resolve, reject) => {
     var tableName = 'registrations'
