@@ -1,52 +1,14 @@
-'use strict';
+'use strict'
 
-var AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
-
-function parseElement(element) {
-  return {
-    timeSlot: element.timeSlot.S,
-    delay: element.delay.S,
-    trainNumber: element.trainNumber.S,
-    peopleToNotify: element.peopleToNotify.L.map((item) => item.S),
-    departureTime: element.departureTime.S,
-    departureStation: element.departureStation.S
-  }
-}
-
-function registrations() {
-  return new Promise((resolve, reject) => {
-    var tableName = 'registrations'
-    var params = {
-      TableName: 'registrations',
-      KeyConditionExpression: 'timeSlot = :hkey and trainNumber >= :rkey',
-      ExpressionAttributeValues: {
-        ':hkey': {S: '12:02'},
-        ':rkey': {S: 'S001'}
-      }
-    };
-
-    dynamoDb.query(params, function(err, data) {
-      if (err) console.log(err);
-      else resolve(data.Items.map(parseElement));
-    });
-  });
-}
+const registrations = require('./lib/registrations')
+const timeSlots = require('./lib/timeSlots')
 
 module.exports.hello = async event => {
+  var slots = timeSlots.from(new Date())
+  var all = await registrations.forAll(slots)
+  // group by train number in order to make one request foreach station
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go timetableless v1.0! Your function executed successfully!',
-        registrations: await registrations(),
-        input: event
-      },
-      null,
-      2
-    ),
-  };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
-};
+    body: JSON.stringify({ all, event }, null, 2)
+  }
+}
