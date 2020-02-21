@@ -22,6 +22,6 @@ module.exports.hello = async event => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ registrations, event }, null, 2)
+    body: JSON.stringify({ registrations, slots, event }, null, 2)
   }
 }
