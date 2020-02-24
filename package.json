@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/** --exclude test/acceptance/**",
+    "test": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
+    "test:integration": "mocha test/integration/**",
     "test:acceptance": "mocha test/acceptance/**",
     "deploy": "sls deploy --profile xpeppers-develop"
   },
@@ -22,5 +23,8 @@
   "devDependencies": {
     "mocha": "^7.0.1",
     "serverless": "^1.63.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
   }
 }

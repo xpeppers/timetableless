@@ -10,14 +10,12 @@ module.exports.updateDelays = async event => {
   var slots = timeSlots.from(new Date(), ONE_HOUR)
   var registrations = await registrationRepository.forAll(slots)
 
-  // registrations.forEach( (registration) => {
-  //   var trainInfo = trenitalia.trainInfo(registration.trainNumber)
-  // })
+  registrations.forEach((registration) => {
+    var delays = await trenitalia.trainDelays(registration.trainNumber)
+    console.log(`Delays for ${registration.trainNumber}: `, delays)
 
-  // per ogni treno
-  // recuperiamo stazione di partenza: http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/cercaNumeroTrenoTrenoAutocomplete/4620
-  // chiediamo info treno: http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/<id-stazione-partenza>/<numero-treno>
-  // per ogni stazione registrata aggiornare il ritardo
+    // TODO: aggiornare il ritardo
+  })
 
   return {
     statusCode: 200,
