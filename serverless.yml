@@ -30,12 +30,13 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  updateDelays:
+    handler: handler.updateDelays
     events:
       - http:
-          path: hello
+          path: delays
           method: get
+
 resources:
   Resources:
     registrations:

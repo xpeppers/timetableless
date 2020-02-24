@@ -6,10 +6,9 @@ const trenitalia = require('./lib/trenitalia')
 
 const ONE_HOUR = 60
 
-module.exports.hello = async event => {
+module.exports.updateDelays = async event => {
   var slots = timeSlots.from(new Date(), ONE_HOUR)
   var registrations = await registrationRepository.forAll(slots)
-  // group by train number in order to make one request foreach station
 
   // registrations.forEach( (registration) => {
   //   var trainInfo = trenitalia.trainInfo(registration.trainNumber)
