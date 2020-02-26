@@ -7,12 +7,27 @@ const { forEach } = require('./lib/asyncHelper')
 
 const ONE_HOUR = 60
 
-async function updateDelay(registration) {
-  var delays = await trenitalia.trainDelays(registration.trainNumber)
+function filterBy(station) {
+  return (delays) => delays.filter((delay) => delay.station === station)
+}
 
-  return delays.filter((delay) => delay.station === registration.departureStation)
+function getFirstDelay(delaysData) {
+  return delaysData[0].delay
+}
 
-  // TODO: aggiornare il ritardo
+function update(registration) {
+  return (delay) => {
+    registrationRepository.updateDelay(registration, delay)
+    return delay
+  }
+}
+
+function updateDelay(registration) {
+  return trenitalia
+    .trainDelays(registration.trainNumber)
+    .then(filterBy(registration.departureStation))
+    .then(getFirstDelay)
+    .then(update(registration))
 }
 
 module.exports.updateDelays = async event => {
