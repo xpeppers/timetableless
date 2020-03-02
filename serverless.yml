@@ -17,6 +17,7 @@ functions:
   updateDelays:
     handler: handler.updateDelays
     events:
+      # - schedule: rate(2 minutes)
       - http:
           path: delays
           method: get
