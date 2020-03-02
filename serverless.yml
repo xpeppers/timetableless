@@ -18,6 +18,13 @@ functions:
     handler: handler.updateDelays
     events:
       - schedule: rate(2 minutes)
+  notifyDelays:
+    handler: handler.notifyDelays
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt: [registrations, StreamArn]
 
 resources:
   Resources:
@@ -38,3 +45,5 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES

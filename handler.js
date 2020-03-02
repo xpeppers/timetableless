@@ -33,6 +33,11 @@ function updateDelay(registration) {
     .then(update(registration))
 }
 
+module.exports.notifyDelays = async (first, second) => {
+  console.log('First:', first)
+  console.log('Second:', second)
+}
+
 module.exports.updateDelays = async () => {
   var slots = timeSlots.from(new Date(), ONE_HOUR)
   console.log('Slots to query:', slots)
