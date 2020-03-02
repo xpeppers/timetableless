@@ -33,11 +33,6 @@ function updateDelay(registration) {
     .then(update(registration))
 }
 
-module.exports.notifyDelays = async (first, second) => {
-  console.log('First:', first)
-  console.log('Second:', second)
-}
-
 module.exports.updateDelays = async () => {
   var slots = timeSlots.from(new Date(), ONE_HOUR)
   console.log('Slots to query:', slots)
@@ -45,4 +40,29 @@ module.exports.updateDelays = async () => {
   console.log('Registrations found:', registrations)
   var updatedRegistrations = await forEach(registrations, updateDelay)
   console.log('Registrations updated:', updatedRegistrations)
+}
+
+function parseElement(element) {
+  return {
+    timeSlot: element.timeSlot.S,
+    delay: element.delay.N,
+    trainNumber: element.trainNumber.S,
+    departureStation: element.departureStation.S,
+    peopleToNotify: element.peopleToNotify.L.map((item) => item.S),
+    departureTime: element.departureTime.S
+  }
+}
+
+function toEvents(record) {
+  console.log("Record: ", record.dynamodb)
+  console.log("NEW: ", parseElement(record.dynamodb.NewImage))
+  console.log("OLD: ", parseElement(record.dynamodb.OldImage))
+  return record.dynamodb
+}
+
+module.exports.notifyDelays = async (first, second) => {
+  console.log('First:', first)
+  console.log('Second:', second)
+
+  first.Records.map(toEvents)
 }
