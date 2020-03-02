@@ -17,8 +17,12 @@ function getFirstDelay(delaysData) {
 
 function update(registration) {
   return (delay) => {
-    registrationRepository.updateDelay(registration, delay)
-    return delay
+    return registrationRepository.updateDelay(registration, delay)
+      .then((registration) => {
+        console.log('Updated Registration: ', registration)
+        return registration
+      })
+      .catch(console.error)
   }
 }
 
@@ -33,11 +37,10 @@ function updateDelay(registration) {
 module.exports.updateDelays = async event => {
   var slots = timeSlots.from(new Date(), ONE_HOUR)
   var registrations = await registrationRepository.forAll(slots)
-
-  var delays = await forEach(registrations, updateDelay)
+  var updatedRegistrations = await forEach(registrations, updateDelay)
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ registrations, slots, delays, event }, null, 2)
+    body: JSON.stringify({ updatedRegistrations, slots, event }, null, 2)
   }
 }
