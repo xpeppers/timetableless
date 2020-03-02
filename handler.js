@@ -7,6 +7,11 @@ const { forEach } = require('./lib/asyncHelper')
 
 const ONE_HOUR = 60
 
+const peekLog = (name) => (value) => {
+  console.log(name, registration)
+  return value
+}
+
 function filterBy(station) {
   return (delays) => delays.filter((delay) => delay.station === station)
 }
@@ -16,14 +21,7 @@ function getFirstDelay(delaysData) {
 }
 
 function update(registration) {
-  return (delay) => {
-    return registrationRepository.updateDelay(registration, delay)
-      .then((registration) => {
-        console.log('Updated Registration: ', registration)
-        return registration
-      })
-      .catch(console.error)
-  }
+  return (delay) => registrationRepository.updateDelay(registration, delay).catch(console.error).then(() => {})
 }
 
 function updateDelay(registration) {
@@ -32,6 +30,7 @@ function updateDelay(registration) {
     .then(filterBy(registration.departureStation))
     .then(getFirstDelay)
     .then(update(registration))
+    .then(peekLog('Updated Registration: '))
 }
 
 module.exports.updateDelays = async event => {
