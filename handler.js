@@ -16,7 +16,7 @@ function getFirstDelay(delaysData) {
 }
 
 function update(registration) {
-  return delay => registrationRepository.updateDelay(registration, delay).catch(console.error).then(() => {})
+  return delay => registrationRepository.updateDelay(registration, delay).catch(console.error)
 }
 
 function updateDelay(registration) {
