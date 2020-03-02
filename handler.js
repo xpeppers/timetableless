@@ -16,7 +16,14 @@ function getFirstDelay(delaysData) {
 }
 
 function update(registration) {
-  return delay => registrationRepository.updateDelay(registration, delay).catch(console.error)
+  return delay => {
+    if(registration.delay === delay) {
+      console.log("Already updated, skipping: ", registration)
+      return {}
+    }
+
+    return registrationRepository.updateDelay(registration, delay).catch(console.error)
+  }
 }
 
 function updateDelay(registration) {
