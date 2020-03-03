@@ -14,5 +14,5 @@ module.exports.updateDelays = async () => {
 module.exports.notifyDelays = async (event) => {
   var events = new DynamoDbEvents(event)
 
-  console.log('Event:', events.delayChanged())
+  console.log('Delay Changed Events:', events.delayChanged())
 }
