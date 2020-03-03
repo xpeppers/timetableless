@@ -1,9 +1,10 @@
 const { equal, deepEqual } = require("assert")
-const { trainDelays } = require("../../lib/trenitalia")
+const { Trenitalia } = require("../../lib/trenitalia")
 
 describe('Trenitalia', () => {
   it('train delays', async () => {
-    var delays = await trainDelays("4640")
+    var trenitalia = new Trenitalia()
+    var delays = await trenitalia.trainDelays("4640")
 
     equal(delays.length, 14)
     deepEqual(delays[0].station, "S00228")

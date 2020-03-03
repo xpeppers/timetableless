@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
-    "test:integration": "mocha test/integration/**",
+    "test": "mocha test/** --exclude test/acceptance/** --exclude test/integration/** && mocha test/integration/**",
     "test:acceptance": "mocha test/acceptance/**",
     "deploy": "sls deploy --profile xpeppers-develop"
   },
@@ -22,7 +21,8 @@
   "homepage": "https://github.com/dallagi/timetableless#readme",
   "devDependencies": {
     "mocha": "^7.0.1",
-    "serverless": "^1.63.0"
+    "serverless": "^1.63.0",
+    "sinon": "^9.0.0"
   },
   "dependencies": {
     "axios": "^0.19.2"
