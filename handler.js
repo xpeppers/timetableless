@@ -3,12 +3,12 @@
 const { RegistrationRepository } = require('./lib/registrations')
 const { Trenitalia } = require('./lib/trenitalia')
 const { DynamoDbEvents } = require("./lib/events")
-const { DelayService } = require("./lib/delayService")
+const { UpdateDelayService } = require("./lib/updateDelayService")
 
 module.exports.updateDelays = async () => {
-  const delayService = new DelayService(new RegistrationRepository(), new Trenitalia())
+  const service = new UpdateDelayService(new RegistrationRepository(), new Trenitalia())
 
-  await delayService.update(new Date(), 60)
+  await service.update(new Date(), 60)
 }
 
 module.exports.notifyDelays = async (event) => {

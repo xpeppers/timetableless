@@ -1,7 +1,7 @@
 'use strict'
 
 const sinon = require('sinon')
-const { DelayService } = require("../lib/delayService")
+const { UpdateDelayService } = require("../lib/updateDelayService")
 const { RegistrationRepository } = require('../lib/registrations')
 const { Trenitalia } = require('../lib/trenitalia')
 
@@ -9,18 +9,18 @@ const registrationRepository = new RegistrationRepository()
 const trenitalia = new Trenitalia()
 const stubLogger = () => {}
 
-describe('DelayService', () => {
+describe('UpdateDelayService', () => {
   it('update delay when delay is changed', async () => {
     const repository = sinon.mock(registrationRepository)
     const trenitaliaService = sinon.mock(trenitalia)
-    const events = new DelayService(registrationRepository, trenitalia, stubLogger)
+    const service = new UpdateDelayService(registrationRepository, trenitalia, stubLogger)
     const registr = registration('4640', 'S00458', 0)
 
     repository.expects('findAll').returns([registr]).once()
     trenitaliaService.expects('trainDelays').withArgs('4640').returns(Promise.resolve([{station: 'S00458', delay: 99}])).once()
     repository.expects('updateDelay').withArgs(registr, 99).returns(Promise.resolve(registr)).once()
 
-    await events.update(new Date())
+    await service.update(new Date())
 
     trenitaliaService.verify()
     repository.verify()
@@ -29,14 +29,14 @@ describe('DelayService', () => {
   it('do not update delay when delay is not changed', async () => {
     const repository = sinon.mock(registrationRepository)
     const trenitaliaService = sinon.mock(trenitalia)
-    const events = new DelayService(registrationRepository, trenitalia, stubLogger)
+    const service = new UpdateDelayService(registrationRepository, trenitalia, stubLogger)
     const registr = registration('4640', 'S00458', 0)
 
     repository.expects('findAll').returns([registr]).once()
     trenitaliaService.expects('trainDelays').withArgs('4640').returns(Promise.resolve([{station: 'S00458', delay: 0}])).once()
     repository.expects('updateDelay').withArgs(registr, 0).returns(Promise.resolve(registr)).never()
 
-    await events.update(new Date())
+    await service.update(new Date())
 
     trenitaliaService.verify()
     repository.verify()
