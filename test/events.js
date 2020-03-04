@@ -1,7 +1,7 @@
 'use strict'
 
 const { deepEqual } = require("assert")
-const { DynamoDbEvents } = require("../lib/events")
+const { DynamoDbEvents } = require("../lib/dynamoDbEvents")
 
 describe('Events', () => {
   it('empty list when delay is not changed', () => {

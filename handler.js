@@ -1,8 +1,8 @@
 'use strict'
 
-const { RegistrationRepository } = require('./lib/registrations')
+const { RegistrationRepository } = require('./lib/registrationRepository')
 const { Trenitalia } = require('./lib/trenitalia')
-const { DynamoDbEvents } = require("./lib/events")
+const { DynamoDbEvents } = require("./lib/dynamoDbEvents")
 const { UpdateDelayService } = require("./lib/updateDelayService")
 const { NotifyDelayService } = require("./lib/notifyDelayService")
 

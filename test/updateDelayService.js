@@ -1,8 +1,8 @@
 'use strict'
 
-const sinon = require('sinon')
+const { mock } = require('sinon')
 const { UpdateDelayService } = require("../lib/updateDelayService")
-const { RegistrationRepository } = require('../lib/registrations')
+const { RegistrationRepository } = require('../lib/registrationRepository')
 const { Trenitalia } = require('../lib/trenitalia')
 
 const registrationRepository = new RegistrationRepository()
@@ -11,8 +11,8 @@ const stubLogger = () => {}
 
 describe('UpdateDelayService', () => {
   it('update delay when delay is changed', async () => {
-    const repository = sinon.mock(registrationRepository)
-    const trenitaliaService = sinon.mock(trenitalia)
+    const repository = mock(registrationRepository)
+    const trenitaliaService = mock(trenitalia)
     const service = new UpdateDelayService(registrationRepository, trenitalia, stubLogger)
     const registr = registration('4640', 'S00458', 0)
 
@@ -27,8 +27,8 @@ describe('UpdateDelayService', () => {
   })
 
   it('do not update delay when delay is not changed', async () => {
-    const repository = sinon.mock(registrationRepository)
-    const trenitaliaService = sinon.mock(trenitalia)
+    const repository = mock(registrationRepository)
+    const trenitaliaService = mock(trenitalia)
     const service = new UpdateDelayService(registrationRepository, trenitalia, stubLogger)
     const registr = registration('4640', 'S00458', 0)
 
