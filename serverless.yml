@@ -1,5 +1,12 @@
 service: timetableless
 
+package:
+  individually: true
+  exclude:
+    - handlers/**
+    - test/**
+    - README.md
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -23,6 +30,9 @@ functions:
     handler: ./handlers/updateDelays.handler
     events:
       - schedule: rate(2 minutes)
+    package:
+      include:
+        - handlers/updateDelays.js
   notifyDelays:
     handler: ./handlers/notifyDelays.handler
     events:
@@ -30,6 +40,9 @@ functions:
           type: dynamodb
           arn:
             Fn::GetAtt: [registrations, StreamArn]
+    package:
+      include:
+        - handlers/notifyDelays.js
 
 resources:
   Resources:
