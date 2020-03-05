@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
+    "test:integration": "mocha test/integration/**",
     "test:acceptance": "mocha test/acceptance/**",
     "deploy": "sls deploy --profile xpeppers-develop"
   },

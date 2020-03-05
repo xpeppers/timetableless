@@ -1,7 +1,7 @@
 'use strict'
 
 const { deepEqual } = require("assert")
-const { forEach, flatArray, flatObjectAttributeBy } = require("../lib/asyncHelper")
+const { forEach, flatArray, flatObjectByAttribute } = require("../lib/asyncHelper")
 
 describe('Async Helper', () => {
   it('forEach', () => {
@@ -16,7 +16,7 @@ describe('Async Helper', () => {
     deepEqual(flatArray(multipleArray), [1, 2, 3, 4])
   })
 
-  it('flatObjectAttributeBy', () => {
+  it('flatObjectByAttribute', () => {
     var firstValue = { train: 'first', people: ['a@b.c', 'd@e.f'] }
     var secondValue = { train: 'second', people: ['d@e.f', 'g@h.i'] }
     var multipleArray = [firstValue, secondValue]
@@ -28,7 +28,7 @@ describe('Async Helper', () => {
       { train: 'second', people: 'g@h.i' }
     ]
 
-    deepEqual(flatObjectAttributeBy(multipleArray, 'people'), resultingArray)
+    deepEqual(flatObjectByAttribute(multipleArray, 'people'), resultingArray)
 
   })
 })
