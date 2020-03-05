@@ -20,11 +20,11 @@ provider:
 
 functions:
   updateDelays:
-    handler: handler.updateDelays
+    handler: ./handlers/updateDelays.handler
     events:
       - schedule: rate(2 minutes)
   notifyDelays:
-    handler: handler.notifyDelays
+    handler: ./handlers/notifyDelays.handler
     events:
       - stream:
           type: dynamodb
