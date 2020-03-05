@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/** --exclude test/acceptance/** --exclude test/integration/** && mocha test/integration/**",
+    "test": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
     "test:acceptance": "mocha test/acceptance/**",
     "deploy": "sls deploy --profile xpeppers-develop"
   },

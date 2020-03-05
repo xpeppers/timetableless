@@ -9,6 +9,7 @@ provider:
     - Effect: "Allow"
       Action:
         - "dynamodb:*"
+        - "ses:*"
       Resource: arn:aws:dynamodb:eu-west-1:*:table/*
   environment:
     variable1: value1
