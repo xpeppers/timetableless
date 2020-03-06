@@ -33,6 +33,9 @@ functions:
     package:
       include:
         - handlers/updateDelays.js
+  addRegistration:
+    handler: ./handlers/addRegistration.handler
+
   notifyDelays:
     handler: ./handlers/notifyDelays.handler
     events:
