@@ -35,6 +35,10 @@ functions:
         - handlers/updateDelays.js
   addRegistration:
     handler: ./handlers/addRegistration.handler
+    events:
+      - http:
+          path: /registration
+          method: POST
 
   notifyDelays:
     handler: ./handlers/notifyDelays.handler
