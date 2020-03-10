@@ -7,7 +7,7 @@ const stubLog = () => {}
 describe('Registration Event', () => {
   it('parses registration details', () => {
       let fullRegistrationEvent = event(registration("a@b.c", "1", "S01"))
-      var updatedEvent = new RegistrationEvent(fullRegistrationEvent, stubLog)
+      let updatedEvent = new RegistrationEvent(fullRegistrationEvent, stubLog)
 
       equal(updatedEvent.email(), "a@b.c")
       equal(updatedEvent.trainNumber(), "1")

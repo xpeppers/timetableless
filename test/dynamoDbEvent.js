@@ -5,20 +5,20 @@ const { DynamoDbEvent } = require("../lib/dynamoDbEvent")
 
 describe('DynamoDb Event', () => {
   it('empty list when delay is not changed', () => {
-      var updatedEvent = new DynamoDbEvent(dynamoDbEvent('1', '1'))
+      let updatedEvent = new DynamoDbEvent(dynamoDbEvent('1', '1'))
 
       deepEqual(updatedEvent.delayChanged(), [])
   })
 
   it('list of elements with updated delay', () => {
-    var updatedEvent = new DynamoDbEvent(dynamoDbEvent(1, 2))
+    let updatedEvent = new DynamoDbEvent(dynamoDbEvent(1, 2))
 
     deepEqual(updatedEvent.delayChanged(), [parsedEvent('2')])
   })
 
   it('skip new items', () => {
-    var newInsertedEvent = dynamoDbEvent(null, 1)
-    var events = new DynamoDbEvent(newInsertedEvent)
+    let newInsertedEvent = dynamoDbEvent(null, 1)
+    let events = new DynamoDbEvent(newInsertedEvent)
 
     deepEqual(events.delayChanged(), [])
   })
@@ -36,7 +36,7 @@ function parsedEvent(delay) {
 }
 
 function dynamoDbEvent(oldDelay, newDelay) {
-  var record = {
+  let record = {
     eventID: 'e6bebd8df5c00a73b99fc0e91d3247ee',
     eventName: 'MODIFY',
     eventVersion: '1.1',

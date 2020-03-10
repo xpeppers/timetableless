@@ -12,16 +12,16 @@ describe('Async Helper', () => {
   })
 
   it('flatArray', () => {
-    var multipleArray = [[1, 2], [3, 4]]
+    let multipleArray = [[1, 2], [3, 4]]
     deepEqual(flatArray(multipleArray), [1, 2, 3, 4])
   })
 
   it('flatObjectByAttribute', () => {
-    var firstValue = { train: 'first', people: ['a@b.c', 'd@e.f'] }
-    var secondValue = { train: 'second', people: ['d@e.f', 'g@h.i'] }
-    var multipleArray = [firstValue, secondValue]
+    let firstValue = { train: 'first', people: ['a@b.c', 'd@e.f'] }
+    let secondValue = { train: 'second', people: ['d@e.f', 'g@h.i'] }
+    let multipleArray = [firstValue, secondValue]
 
-    var resultingArray = [
+    let resultingArray = [
       { train: 'first', people: 'a@b.c' },
       { train: 'first', people: 'd@e.f' },
       { train: 'second', people: 'd@e.f' },

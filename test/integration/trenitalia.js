@@ -3,8 +3,8 @@ const { Trenitalia } = require("../../lib/trenitalia")
 
 describe('Trenitalia', () => {
   it('train delays', async () => {
-    var trenitalia = new Trenitalia()
-    var delays = await trenitalia.trainDelays("4640")
+    let trenitalia = new Trenitalia()
+    let delays = await trenitalia.trainDelays("4640")
 
     equal(delays.length, 14)
     deepEqual(delays[0].station, "S00228")
@@ -12,8 +12,8 @@ describe('Trenitalia', () => {
   })
 
   it('train departure time', async () => {
-    var trenitalia = new Trenitalia()
-    var departureTime = await trenitalia.departureTime('4640', 'S00460')
+    let trenitalia = new Trenitalia()
+    let departureTime = await trenitalia.departureTime('4640', 'S00460')
 
     equal(departureTime.toISOString().split('T')[1], `06:21:00.000Z`)
   })
