@@ -14,7 +14,7 @@ function respond() {
 
 module.exports.handler = async (event) => {
   const service = new RegistrationService(new RegistrationRepository(), new Trenitalia())
-  let registration = new RegistrationEvent(event)
+  const registration = new RegistrationEvent(event)
 
   return service.addRegistration(registration.email(), registration.trainNumber(), registration.station())
   .catch(console.log)
