@@ -8,7 +8,8 @@
     "test:unit": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
     "test:integration": "mocha test/integration/**",
     "test:acceptance": "mocha test/acceptance/**",
-    "deploy": "sls deploy --profile xpeppers-develop"
+    "deploy": "sls deploy --profile xpeppers-develop",
+    "logs": "serverless logs"
   },
   "repository": {
     "type": "git",

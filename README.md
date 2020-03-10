@@ -1,3 +1,24 @@
+# Timetableless
+
+## Test
+```
+npm t
+```
+
+## Deploy
+setup aws credentials and then
+```
+npm run deploy
+```
+
+## Read functions logs
+You can find functionName in the `serverless.yml` file
+```
+npm run logs -- -f <functionName> -t
+```
+
+
+## Scenario
 API viaggiatreno: https://github.com/bluviolin/TrainMonitor/wiki/API-del-sistema-Viaggiatreno
 
 Come viaggiatore voglio poter essere notificato dal sistema a partire da un'ora prima della partenza teorica del treno e solo quando c'è una variazione nel ritardo.

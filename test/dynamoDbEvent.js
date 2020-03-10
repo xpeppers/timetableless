@@ -1,24 +1,24 @@
 'use strict'
 
 const { deepEqual } = require("assert")
-const { DynamoDbEvents } = require("../lib/dynamoDbEvents")
+const { DynamoDbEvent } = require("../lib/dynamoDbEvent")
 
-describe('Events', () => {
+describe('DynamoDb Event', () => {
   it('empty list when delay is not changed', () => {
-      var updatedEvent = new DynamoDbEvents(dynamoDbEvent('1', '1'))
+      var updatedEvent = new DynamoDbEvent(dynamoDbEvent('1', '1'))
 
       deepEqual(updatedEvent.delayChanged(), [])
   })
 
   it('list of elements with updated delay', () => {
-    var updatedEvent = new DynamoDbEvents(dynamoDbEvent(1, 2))
+    var updatedEvent = new DynamoDbEvent(dynamoDbEvent(1, 2))
 
     deepEqual(updatedEvent.delayChanged(), [parsedEvent('2')])
   })
 
   it('skip new items', () => {
     var newInsertedEvent = dynamoDbEvent(null, 1)
-    var events = new DynamoDbEvents(newInsertedEvent)
+    var events = new DynamoDbEvent(newInsertedEvent)
 
     deepEqual(events.delayChanged(), [])
   })

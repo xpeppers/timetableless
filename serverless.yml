@@ -33,12 +33,16 @@ functions:
     package:
       include:
         - handlers/updateDelays.js
+
   addRegistration:
     handler: ./handlers/addRegistration.handler
     events:
       - http:
           path: /registration
           method: POST
+    package:
+      include:
+        - handlers/addRegistration.js
 
   notifyDelays:
     handler: ./handlers/notifyDelays.handler
