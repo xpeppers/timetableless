@@ -15,6 +15,6 @@ describe('Trenitalia', () => {
     var trenitalia = new Trenitalia()
     var departureTime = await trenitalia.departureTime('4640', 'S00460')
 
-    equal(departureTime.toISOString(), '2020-03-06T06:21:00.000Z')
+    equal(departureTime.toISOString().split('T')[1], `06:21:00.000Z`)
   })
 })
