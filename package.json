@@ -6,9 +6,9 @@
   "scripts": {
     "install:dynamodb": "serverless dynamodb install",
     "start": "serverless offline start",
-    "test": "npm run test:unit && npm run test:integration",
+    "test": "npm run test:unit",
     "test:unit": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
-    "test:integration": "mocha test/integration/**",
+    "test:integration": "npm start -- --exec 'mocha test/integration/**'",
     "test:acceptance": "npm start -- --exec 'mocha test/acceptance/**'",
     "logs": "serverless logs",
     "deploy": "sls deploy --profile xpeppers-develop",
