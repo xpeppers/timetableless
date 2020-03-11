@@ -16,7 +16,14 @@ custom:
     stages: [dev]
     start:
       migrate: true
+      inMemory: true
+      seed: true
       port: 3333
+    seed:
+      domain:
+        sources:
+          - table: registrations
+            sources: [./seeds/registrations.json]
 
 provider:
   name: aws
