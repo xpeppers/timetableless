@@ -32,5 +32,6 @@
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^5.12.1",
     "sinon": "^9.0.0"
-  }
+  },
+  "dependencies": {}
 }
