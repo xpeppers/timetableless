@@ -5,10 +5,10 @@ const { Trenitalia } = require("../lib/trenitalia")
 const { RegistrationService } = require("../lib/registrationService")
 const { RegistrationEvent } = require("../lib/registrationEvent")
 
-function respond() {
+function respond(recipient) {
   return {
     statusCode: 200,
-    body: "Registration"
+    body: `'${recipient}' registered`
   }
 }
 
