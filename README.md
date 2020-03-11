@@ -11,10 +11,15 @@ setup aws credentials and then
 npm run deploy
 ```
 
-## Read functions logs
+## Tail on function logs
 You can find functionName in the `serverless.yml` file
 ```
 npm run logs -- -f <functionName> -t
+```
+
+## Test registration call
+```
+curl -X POST -v <LAMBDA_BASE_URL>/registration -d '{"email":"a@b.c", "trainNumber":"4640", "station":"S00461"}'
 ```
 
 
