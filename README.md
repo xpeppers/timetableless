@@ -12,8 +12,24 @@ npm start
 ```
 
 ## Test
+By default runs Unit and Integration Tests
 ```
 npm t
+```
+
+Run only unit tests
+```
+npm run test:unit
+```
+
+Run only integration tests
+```
+npm run test:integration
+```
+
+Run only acceptance tests
+```
+npm run test:acceptance
 ```
 
 ## Deploy
@@ -27,12 +43,6 @@ You can find functionName in the `serverless.yml` file
 ```
 npm run logs -- -f <functionName> -t
 ```
-
-## Test registration call
-```
-curl -X POST -v <LAMBDA_BASE_URL>/registration -d '{"email":"a@b.c", "trainNumber":"4640", "station":"S00461"}'
-```
-
 
 ## Scenario
 API viaggiatreno: https://github.com/bluviolin/TrainMonitor/wiki/API-del-sistema-Viaggiatreno
