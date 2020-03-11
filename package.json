@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "install:dynamodb": "serverless dynamodb install",
+    "start": "serverless offline start",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
     "test:integration": "mocha test/integration/**",
-    "test:acceptance": "mocha test/acceptance/**",
+    "test:acceptance": "npm start -- --exec 'mocha test/acceptance/**'",
+    "logs": "serverless logs",
     "deploy": "sls deploy --profile xpeppers-develop",
-    "logs": "serverless logs"
+    "sls": "serverless"
   },
   "repository": {
     "type": "git",
@@ -23,11 +26,13 @@
   },
   "homepage": "https://github.com/dallagi/timetableless#readme",
   "devDependencies": {
+    "axios": "^0.19.2",
     "mocha": "^7.0.1",
     "serverless": "^1.63.0",
+    "serverless-offline": "^5.12.1",
     "sinon": "^9.0.0"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "serverless-dynamodb-local": "^0.2.39"
   }
 }

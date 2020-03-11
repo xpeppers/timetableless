@@ -7,6 +7,17 @@ package:
     - test/**
     - README.md
 
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+
+custom:
+  dynamodb:
+    stages: [dev]
+    start:
+      migrate: true
+      port: 3333
+
 provider:
   name: aws
   runtime: nodejs12.x

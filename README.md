@@ -1,5 +1,16 @@
 # Timetableless
 
+## Setup
+```
+npm install
+npm run install:dynamodb
+```
+
+## Start all services locally
+```
+npm start
+```
+
 ## Test
 ```
 npm t
