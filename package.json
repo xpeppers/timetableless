@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy": "npm run deploy:server && npm run deploy:client",
+    "deploy:client": "sls client deploy --profile xpeppers-develop --no-confirm",
+    "deploy:server": "sls deploy --profile xpeppers-develop",
     "install:dynamodb": "serverless dynamodb install",
+    "logs": "serverless logs",
+    "remove": "sls remove --profile xpeppers-develop && sls client remove --profile xpeppers-develop",
+    "sls": "serverless",
     "start": "serverless offline start",
     "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**",
-    "test:integration": "npm start -- --exec 'mocha test/integration/**'",
     "test:acceptance": "npm start -- --exec 'mocha test/acceptance/**'",
-    "logs": "serverless logs",
-    "deploy": "sls deploy --profile xpeppers-develop",
-    "sls": "serverless"
+    "test:integration": "npm start -- --exec 'mocha test/integration/**'",
+    "test:unit": "mocha test/** --exclude test/acceptance/** --exclude test/integration/**"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,7 @@
     "mocha": "^7.0.1",
     "serverless": "^1.63.0",
     "serverless-dynamodb-local": "^0.2.39",
+    "serverless-finch": "^2.5.2",
     "serverless-offline": "^5.12.1",
     "sinon": "^9.0.0"
   },

@@ -6,10 +6,12 @@ package:
     - handlers/**
     - test/**
     - README.md
+    - client/**
 
 plugins:
   - serverless-offline
   - serverless-dynamodb-local
+  - serverless-finch
 
 custom:
   dynamodb:
@@ -24,6 +26,8 @@ custom:
         sources:
           - table: registrations
             sources: [./seeds/registrations.json]
+  client:
+    bucketName: timetableless
 
 provider:
   name: aws
@@ -58,6 +62,7 @@ functions:
       - http:
           path: /registration
           method: POST
+          cors: true
     package:
       include:
         - handlers/addRegistration.js
