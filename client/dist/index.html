@@ -1,5 +1,8 @@
+<!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
   <body>
     <form id="form">
       <p>Email:</p>
@@ -28,11 +31,11 @@
           {email: email, trainNumber: trainNumber, station: station}
         )
           .then(function(result) {
-            alert(result.data)
+            alert(result.data.message)
             document.querySelector("#form").reset()
           })
           .catch(function(error) {
-            alert(error.response.status + ":" + error.response.data)
+            alert(error.response.status + ":" + error.response.data.message)
             document.querySelector("#form").reset()
           })
       })
