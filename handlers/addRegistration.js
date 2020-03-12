@@ -8,7 +8,7 @@ const { RegistrationEvent } = require("../lib/registrationEvent")
 function respond(body) {
   return {
     statusCode: 200,
-    body: body
+    body: JSON.stringify({ message: body })
   }
 }
 
@@ -16,7 +16,7 @@ function error(err) {
   console.log("ERROR: ", err)
   return {
     statusCode: 400,
-    body: err.message
+    body: JSON.stringify({ message: err.message })
   }
 }
 
