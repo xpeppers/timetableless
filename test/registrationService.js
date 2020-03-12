@@ -36,6 +36,22 @@ describe('RegistrationService', () => {
 
     repository.verify()
   })
+
+  it('respond with an error when train not found', async () => {
+    const registrationRepository = new RegistrationRepository()
+    const trenitalia = new Trenitalia()
+    const repository = mock(registrationRepository)
+    const trenitaliaService = mock(trenitalia)
+
+    trenitaliaService.expects('departureTime').withArgs('not_found', 'not_found').throws(new Error("not found"))
+    repository.expects('exists').never()
+    repository.expects('addPersonToNotify').never()
+    repository.expects('create').never()
+
+    await new RegistrationService(registrationRepository, trenitalia, stubLog).addRegistration('a@b.c', '4640', 'S00458')
+
+    repository.verify()
+  })
 })
 
 function registration(recipients, trainNumber, departureStation, timeSlot, departureTime, delay) {

@@ -5,10 +5,18 @@ const { Trenitalia } = require("../lib/trenitalia")
 const { RegistrationService } = require("../lib/registrationService")
 const { RegistrationEvent } = require("../lib/registrationEvent")
 
-function respond(recipient) {
+function respond(body) {
   return {
     statusCode: 200,
-    body: `'${recipient}' registered`
+    body: body
+  }
+}
+
+function error(err) {
+  console.log(err)
+  return {
+    statusCode: 400,
+    body: err
   }
 }
 
@@ -17,6 +25,6 @@ module.exports.handler = async (event) => {
   const registration = new RegistrationEvent(event)
 
   return service.addRegistration(registration.email(), registration.trainNumber(), registration.station())
-  .catch(console.log)
+  .catch(error)
   .then(respond)
 }
