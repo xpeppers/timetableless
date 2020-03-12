@@ -7,5 +7,6 @@ const { UpdateDelayService } = require("../lib/updateDelayService")
 module.exports.handler = async () => {
   const service = new UpdateDelayService(new RegistrationRepository(), new Trenitalia())
 
-  await service.update(new Date(), 60)
+  let response = await service.update(new Date(), 60)
+  console.log("update delays handler response: ", response)
 }

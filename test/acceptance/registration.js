@@ -14,4 +14,14 @@ describe('Registration', () => {
     equal(registrations.length, 1)
     equal(registrations[0].peopleToNotify, ['pippo'])
   })
+
+  it('Fails to register a new user for a new station', async () => {
+    try {
+      let response = await axios.post("http://localhost:3000/registration", {email: 'pippo', trainNumber:'not_found', station:'not_found'})
+      throw new Error("should throw an error, but it doesn't")
+    } catch(error) {
+      equal(error.response.status, 400)
+      equal(error.response.data, "Enter valid values")
+    }
+  })
 })

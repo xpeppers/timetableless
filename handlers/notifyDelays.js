@@ -8,5 +8,7 @@ module.exports.handler = async (event) => {
   const events = new DynamoDbEvent(event)
   const service = new NotifyDelayService(new EmailNotifier('marco.dallagiacoma@xpeppers.com'))
 
-  await service.sendAll(events.delayChanged())
+  let response = await service.sendAll(events.delayChanged())
+
+  console.log('NotiFyDelaysHandler response: ', response)
 }

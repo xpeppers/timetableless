@@ -13,10 +13,10 @@ function respond(body) {
 }
 
 function error(err) {
-  console.log(err)
+  console.log("ERROR: ", err)
   return {
     statusCode: 400,
-    body: err
+    body: err.message
   }
 }
 
@@ -25,6 +25,6 @@ module.exports.handler = async (event) => {
   const registration = new RegistrationEvent(event)
 
   return service.addRegistration(registration.email(), registration.trainNumber(), registration.station())
-  .catch(error)
   .then(respond)
+  .catch(error)
 }

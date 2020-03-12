@@ -1,5 +1,6 @@
 'use strict'
 
+const { deepEqual: equal } = require('assert')
 const { mock } = require('sinon')
 const { RegistrationService } = require("../lib/registrationService")
 const { RegistrationRepository } = require("../lib/registrationRepository")
@@ -43,12 +44,17 @@ describe('RegistrationService', () => {
     const repository = mock(registrationRepository)
     const trenitaliaService = mock(trenitalia)
 
-    trenitaliaService.expects('departureTime').withArgs('not_found', 'not_found').throws(new Error("not found"))
+    trenitaliaService.expects('departureTime').withArgs('not_found', 'not_found').throws(new Error("something bad happen"))
     repository.expects('exists').never()
     repository.expects('addPersonToNotify').never()
     repository.expects('create').never()
 
-    await new RegistrationService(registrationRepository, trenitalia, stubLog).addRegistration('a@b.c', '4640', 'S00458')
+    try {
+      let retu = await new RegistrationService(registrationRepository, trenitalia, stubLog, stubLog).addRegistration('a@b.c', 'not_found', 'not_found')
+      throw new Error("should throw an error, but it doesn't")
+    } catch(e) {
+      equal(e.message, "Enter valid values")
+    }
 
     repository.verify()
   })
