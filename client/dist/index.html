@@ -1,0 +1,41 @@
+<html>
+  <head></head>
+  <body>
+    <form id="form">
+      <p>Email:</p>
+      <input type="email" id="email"></input>
+
+      <p>Train number:</p>
+      <input type="text" id="train-number"></input>
+
+      <p>Station:</p>
+      <input type="text" id="station"></input>
+
+      <br />
+      <button type="button" id="submit-button">Register</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">
+      document.querySelector("#submit-button").addEventListener('click', function(e) {
+        var email = document.querySelector("#email").value
+        var trainNumber = document.querySelector("#train-number").value
+        var station = document.querySelector("#station").value
+
+        axios.post(
+          "https://u9myp90685.execute-api.eu-west-1.amazonaws.com/dev/registration",
+          {email: email, trainNumber: trainNumber, station: station}
+        )
+          .then(function(result) {
+            alert(result.data)
+            document.querySelector("#form").reset()
+          })
+          .catch(function(error) {
+            alert(error)
+            document.querySelector("#form").reset()
+          })
+      })
+    </script>
+  </body>
+</html>
