@@ -1,0 +1,17 @@
+{
+  "name": "timetableless-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "sh -c 'NODE_ENV=$0 parcel build index.html'",
+    "deploy": "sh -c 'aws s3 sync dist \"s3://timetableless-$0\"'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dallagi/timetableless.git"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}

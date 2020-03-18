@@ -100,3 +100,34 @@ resources:
           WriteCapacityUnits: 1
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+    FrontendBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+        CorsConfiguration:
+          CorsRules:
+            - AllowedMethods:
+                - GET
+                - HEAD
+              AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+    FrontendBucketPolicy:
+      Type: 'AWS::S3::BucketPolicy'
+      Properties:
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal: "*"
+              Action:
+                - "s3:GetObject"
+              Resource:
+                Fn::Join: ['', [Fn::GetAtt: [ FrontendBucket, Arn ], '/*'] ]
+        Bucket:
+          Ref: FrontendBucket
+

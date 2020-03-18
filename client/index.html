@@ -27,7 +27,7 @@
         var station = document.querySelector("#station").value
 
         axios.post(
-          "https://u9myp90685.execute-api.eu-west-1.amazonaws.com/dev/registration",
+          `https://u9myp90685.execute-api.eu-west-1.amazonaws.com/${process.env.NODE_ENV}/registration`,
           {email: email, trainNumber: trainNumber, station: station}
         )
           .then(function(result) {
