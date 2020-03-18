@@ -27,11 +27,12 @@ custom:
           - table: registrations
             sources: [./seeds/registrations.json]
   client:
-    bucketName: timetableless
+    bucketName: timetableless-${self:provider.stage}
 
 provider:
   name: aws
   runtime: nodejs12.x
+  stage: ${opt:stage, "dev"}
   region: eu-west-1
   memorySize: 256
   iamRoleStatements:
@@ -83,7 +84,7 @@ resources:
     registrations:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: registrations
+        TableName: registrations-${self:provider.stage}
         AttributeDefinitions:
           - AttributeName: timeSlot
             AttributeType: S

@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "npm run deploy:server && npm run deploy:client",
     "deploy:client": "sls client deploy --profile xpeppers-develop --no-confirm",
     "deploy:server": "sls deploy --profile xpeppers-develop",
     "install:dynamodb": "serverless dynamodb install",
