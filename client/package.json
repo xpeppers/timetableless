@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "sh -c 'NODE_ENV=$0 parcel build index.html'",
-    "deploy": "sh -c 'aws s3 sync dist \"s3://timetableless-$0\"'"
+    "deploy": "sh -c 'npm run build $0 && aws s3 sync dist \"s3://timetableless-$0\"'"
   },
   "repository": {
     "type": "git",
