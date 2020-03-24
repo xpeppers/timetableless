@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install
+      - npm run install:dynamodb
+      - npm run install:client
+
+  test:
+    commands:
+      - npm run test
+
+  build:
+    commands:
+      - npm run deploy dev | tee deploy.out
+
+  # todo: run acceptance test after deploy?
+  # post_build:
+  #   commands:
+  #   - npm run test:acceptance 
