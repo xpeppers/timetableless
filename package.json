@@ -7,7 +7,7 @@
     "deploy": "sh -c 'npm run deploy:server $0 && npm run deploy:client $0'",
     "deploy:client": "sh -c 'cd client && npm run deploy $0 && cd -'",
     "deploy:server": "sh -c 'sls deploy --profile xpeppers-develop --stage $0'",
-    "install:client": "sh -c 'cd client && npm run deploy $0 && cd -'",
+    "install:client": "sh -c 'cd client && npm install && cd -'",
     "install:dynamodb": "serverless dynamodb install",
     "logs": "serverless logs",
     "remove": "sls remove --profile xpeppers-develop && sls client remove --profile xpeppers-develop",

@@ -7,15 +7,11 @@ phases:
       - npm run install:dynamodb
       - npm run install:client
 
-  test:
+  pre_build:
     commands:
       - npm run test
 
   build:
     commands:
-      - npm run deploy dev | tee deploy.out
+      - npm run deploy dev
 
-  # todo: run acceptance test after deploy?
-  # post_build:
-  #   commands:
-  #   - npm run test:acceptance 
