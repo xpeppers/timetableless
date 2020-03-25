@@ -23,7 +23,7 @@ custom:
     seed:
       domain:
         sources:
-          - table: registrations
+          - table: registrations-${self:provider.stage}
             sources: [./seeds/registrations.json]
   client:
     bucketName: timetableless-${self:provider.stage}
@@ -45,7 +45,7 @@ provider:
         - "ses:SendRawEmail"
       Resource: '*'
   environment:
-    variable1: value1
+    stage: ${self:provider.stage}
 
 functions:
   updateDelays:
