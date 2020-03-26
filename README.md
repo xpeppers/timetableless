@@ -45,12 +45,12 @@ npm run logs -- -f <functionName> -t
 ```
 
 ## TODO
-- Chiudere il giro (magari un interfaccia decente)
-- Diversi ambienti (dev)
-- Test accettazione se possibile quantomeno avvicinarsi
-- Pipeline
-- SES abilitato al mondo?
-- Monitoring?
+- [ ] Chiudere il giro (magari un interfaccia decente)
+- [x] Diversi ambienti (dev)
+- [ ] Test accettazione se possibile quantomeno avvicinarsi
+- [x] Pipeline
+- [ ] SES abilitato al mondo?
+- [ ] Monitoring?
 
 ## Scenario
 API viaggiatreno: https://github.com/bluviolin/TrainMonitor/wiki/API-del-sistema-Viaggiatreno
