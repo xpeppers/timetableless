@@ -13,5 +13,5 @@ phases:
 
   build:
     commands:
-      - npm run deploy dev
+      - npm run deploy $STAGE
 
