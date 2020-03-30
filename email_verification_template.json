@@ -3,6 +3,6 @@
   "FromEmailAddress": "marco.dallagiacoma@xpeppers.com",
   "TemplateSubject": "[Timetableless] Please confirm your email address",
   "TemplateContent": "In order to get notified when your train is late, you have to verify your email by clicking the link below:",
-  "SuccessRedirectionURL": "https://ck3kx4bbr2.execute-api.eu-west-1.amazonaws.com/pro",
-  "FailureRedirectionURL": "https://ck3kx4bbr2.execute-api.eu-west-1.amazonaws.com/pro"
+  "SuccessRedirectionURL": "http://timetableless-pro.s3-website-eu-west-1.amazonaws.com/succeeded.html",
+  "FailureRedirectionURL": "http://timetableless-pro.s3-website-eu-west-1.amazonaws.com/failed.html"
 }
