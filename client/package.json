@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "sh -c 'NODE_ENV=$0 parcel build index.html'",
+    "build": "sh -c 'NODE_ENV=$0 parcel build src/*'",
     "deploy": "sh -c 'npm run build $0 && aws s3 sync dist \"s3://timetableless-$0\"'"
   },
   "repository": {
