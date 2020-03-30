@@ -52,6 +52,16 @@ npm run logs -- -f <functionName> -t
 - [ ] SES abilitato al mondo?
 - [ ] Monitoring?
 
+## Create Custome verification email template
+```
+aws ses create-custom-verification-email-template --cli-input-json file://email_verification_template.json --profile xpeppers-develop --region eu-west-1
+```
+
+## Verify an email
+```
+aws ses send-custom-verification-email --email-address <email> --template-name TimetablelessTemplate --profile xpeppers-develop --region eu-west-1
+```
+
 ## Scenario
 API viaggiatreno: https://github.com/bluviolin/TrainMonitor/wiki/API-del-sistema-Viaggiatreno
 
