@@ -49,7 +49,7 @@ npm run logs -- -f <functionName> -t
 - [x] Diversi ambienti (dev)
 - [ ] Test accettazione se possibile quantomeno avvicinarsi
 - [x] Pipeline
-- [ ] SES abilitato al mondo?
+- [x] SES abilitato al mondo?
 - [ ] Monitoring?
 
 ## Create Custome verification email template
