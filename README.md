@@ -52,6 +52,7 @@ npm run logs -- -f <functionName> -t
 - [] SES abilitato al mondo?
     - [x] template differenti per Dev e Pro
     - [] alla registrazione dell'utente se non è già registrato inviare verifica email
+         - [] TODO: implementare VerificationService
     - [] ? Capire come trovare gli indirizzi già registrati su SES
 - [ ] Monitoring?
 
