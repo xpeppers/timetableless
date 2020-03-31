@@ -31,10 +31,23 @@ describe('Async Helper', () => {
     deepEqual(flatObjectByAttribute(multipleArray, 'people'), resultingArray)
 
   })
+
+  it('forEach one has error', () => {
+    return forEach([1, -1, 3], longSumOne, () => {})
+      .then(result => {
+        deepEqual(result, [2, 4])
+      })
+  })
 })
 
 function longSumOne(value) {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(value + 1), 25)
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if(value === -1) {
+        reject("NEGATIVES NOT ALLOWED")
+      } else {
+        resolve(value + 1)
+      }
+    }, 25)
   })
 }
