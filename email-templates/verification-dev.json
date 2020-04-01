@@ -1,8 +1,0 @@
-{
-  "TemplateName": "TimetablelessTemplateDev",
-  "FromEmailAddress": "marco.dallagiacoma@xpeppers.com",
-  "TemplateSubject": "[Timetableless Dev] Please confirm your email address",
-  "TemplateContent": "In Dev Env: in order to get notified when your train is late, you have to verify your email by clicking the link below:",
-  "SuccessRedirectionURL": "http://timetableless-dev.s3-website-eu-west-1.amazonaws.com/succeeded.html",
-  "FailureRedirectionURL": "http://timetableless-dev.s3-website-eu-west-1.amazonaws.com/failed.html"
-}

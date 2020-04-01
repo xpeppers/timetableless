@@ -49,28 +49,8 @@ npm run logs -- -f <functionName> -t
 - [x] Diversi ambienti (dev)
 - [ ] Test accettazione se possibile quantomeno avvicinarsi
 - [x] Pipeline
-- [] SES abilitato al mondo?
-    - [x] template differenti per Dev e Pro
-    - [] alla registrazione dell'utente se non è già registrato inviare verifica email
-         - [] TODO: implementare VerificationService
-    - [] ? Capire come trovare gli indirizzi già registrati su SES
+- [x] SES abilitato al mondo?
 - [ ] Monitoring?
-
-## Create Custome verification email template
-```
-aws ses create-custom-verification-email-template --cli-input-json file://email-templates/verification-dev.json --profile xpeppers-develop --region eu-west-1
-```
-
-## Verify an email
-```
-aws ses send-custom-verification-email --email-address <email> --template-name TimetablelessTemplateDev --profile xpeppers-develop --region eu-west-1
-```
-
-## Check email verification progress
-
-```
-aws ses get-identity-verification-attributes --identities "<email>" --profile xpeppers-develop --region eu-west-1
-```
 
 Response:
 
