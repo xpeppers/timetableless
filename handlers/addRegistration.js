@@ -2,7 +2,7 @@
 
 const { RegistrationRepository } = require("../lib/registrationRepository")
 const { Trenitalia } = require("../lib/trenitalia")
-const { RegistrationService } = require("../lib/registrationService")
+const { AddRegistrationAction } = require("../lib/addRegistrationAction")
 const { RegistrationEvent } = require("../lib/registrationEvent")
 
 function headers () {
@@ -27,10 +27,10 @@ function error(err) {
 }
 
 module.exports.handler = async (event) => {
-  const service = new RegistrationService(new RegistrationRepository(), new Trenitalia())
   const registration = new RegistrationEvent(event)
+  const action = new AddRegistrationAction(new RegistrationRepository(), new Trenitalia())
 
-  return service.addRegistration(registration.email(), registration.trainNumber(), registration.station())
+  return action.invoke(registration.email(), registration.trainNumber(), registration.station())
   .then(respond)
   .catch(error)
 }
