@@ -6,7 +6,7 @@ const { NotifyDelayService } = require("../lib/notifyDelayService")
 
 module.exports.handler = async (event) => {
   const events = new DynamoDbEvent(event)
-  const service = new NotifyDelayService(new EmailNotifier('vega@it.clara.net'))
+  const service = new NotifyDelayService(new EmailNotifier('carriere@xpeppers.com'))
 
   let response = await service.sendAll(events.delayChanged())
 

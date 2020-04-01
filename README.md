@@ -45,7 +45,11 @@ npm run logs -- -f <functionName> -t
 ```
 
 ## TODO
-- [ ] Chiudere il giro (magari un interfaccia decente)
+- [ ] Cancellazione di una registrazion mediante link inviato via email
+- [ ] Migliorare interfaccia
+    - [ ] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
+    - [ ] Scelta di una delle opzioni e quando seleziono prendo Train e station
+    - [ ] Migliorare il messaggio che viene inviato
 - [x] Diversi ambienti (dev)
 - [ ] Test accettazione se possibile quantomeno avvicinarsi
 - [x] Pipeline
