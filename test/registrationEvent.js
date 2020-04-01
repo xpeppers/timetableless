@@ -1,13 +1,13 @@
 'use strict'
 
 const { equal } = require("assert")
-const { RegistrationEvent } = require("../lib/registrationEvent")
+const { AddRegistrationEvent } = require("../lib/addRegistrationEvent")
 const stubLog = () => {}
 
 describe('Registration Event', () => {
   it('parses registration details', () => {
-      let fullRegistrationEvent = event(registration("a@b.c", "1", "S01"))
-      let updatedEvent = new RegistrationEvent(fullRegistrationEvent, stubLog)
+      let fullAddRegistrationEvent = event(registration("a@b.c", "1", "S01"))
+      let updatedEvent = new AddRegistrationEvent(fullAddRegistrationEvent, stubLog)
 
       equal(updatedEvent.email(), "a@b.c")
       equal(updatedEvent.trainNumber(), "1")

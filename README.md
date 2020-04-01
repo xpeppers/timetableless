@@ -45,7 +45,10 @@ npm run logs -- -f <functionName> -t
 ```
 
 ## TODO
-- [ ] Cancellazione di una registrazion mediante link inviato via email
+- [ ] Cancellazione di una registrazione mediante link inviato via email
+   - [ ] completare i test di DeleteRegistrationAction
+   - [ ] implementare RegistrationRepository.delete
+   - [ ] implementare deleteRegistrationEvent
 - [ ] Migliorare interfaccia
     - [ ] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
     - [ ] Scelta di una delle opzioni e quando seleziono prendo Train e station

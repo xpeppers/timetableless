@@ -6,9 +6,9 @@ const { NotifyDelayAction } = require("../lib/notifyDelayAction")
 
 module.exports.handler = async (event) => {
   const events = new DynamoDbEvent(event)
-  const service = new NotifyDelayAction(new EmailNotifier('carriere@xpeppers.com'))
+  const action = new NotifyDelayAction(new EmailNotifier('carriere@xpeppers.com'))
 
-  let response = await service.execute(events.delayChanged())
+  let response = await action.execute(events.delayChanged())
 
   console.log('NotiFyDelaysHandler response: ', response)
 }

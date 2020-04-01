@@ -5,8 +5,8 @@ const { Trenitalia } = require('../lib/trenitalia')
 const { UpdateDelayAction } = require("../lib/updateDelayAction")
 
 module.exports.handler = async () => {
-  const service = new UpdateDelayAction(new RegistrationRepository(), new Trenitalia())
+  const action = new UpdateDelayAction(new RegistrationRepository(), new Trenitalia())
 
-  let response = await service.execute(new Date(), 60)
+  let response = await action.execute(new Date(), 60)
   console.log("update delays handler response: ", response)
 }
