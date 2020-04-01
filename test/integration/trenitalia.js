@@ -1,7 +1,9 @@
 const { equal, deepEqual } = require("assert")
 const { Trenitalia } = require("../../lib/trenitalia")
 
-describe('Trenitalia', () => {
+describe('Trenitalia', function () {
+  this.timeout(5000)
+
   it('train delays', async () => {
     let trenitalia = new Trenitalia()
     let delays = await trenitalia.trainDelays("4640")

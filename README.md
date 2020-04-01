@@ -56,12 +56,6 @@ npm run logs -- -f <functionName> -t
 - [x] SES abilitato al mondo?
 - [ ] Monitoring?
 
-Response:
-
-```json
-{"VerificationAttributes":{"<email>":{"VerificationStatus":"Success"}}}
-```
-
 ## Scenario
 API viaggiatreno: https://github.com/bluviolin/TrainMonitor/wiki/API-del-sistema-Viaggiatreno
 

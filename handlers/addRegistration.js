@@ -4,7 +4,6 @@ const { RegistrationRepository } = require("../lib/registrationRepository")
 const { Trenitalia } = require("../lib/trenitalia")
 const { RegistrationService } = require("../lib/registrationService")
 const { RegistrationEvent } = require("../lib/registrationEvent")
-const { EmailVerificationService } = require("../lib/emailVerificationService")
 
 function headers () {
   return {'Access-Control-Allow-Origin': '*'}
@@ -28,7 +27,7 @@ function error(err) {
 }
 
 module.exports.handler = async (event) => {
-  const service = new RegistrationService(new RegistrationRepository(), new Trenitalia(), new EmailVerificationService())
+  const service = new RegistrationService(new RegistrationRepository(), new Trenitalia())
   const registration = new RegistrationEvent(event)
 
   return service.addRegistration(registration.email(), registration.trainNumber(), registration.station())

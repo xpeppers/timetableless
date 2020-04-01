@@ -78,6 +78,17 @@ functions:
       include:
         - handlers/notifyDelays.js
 
+  deleteRegistration:
+    handler: ./handlers/deleteRegistration.handler
+    events:
+      - http:
+          path: /registration
+          method: DELETE
+          cors: true
+    package:
+      include:
+        - handlers/deleteRegistration.js
+
 resources:
   Resources:
     registrations:
