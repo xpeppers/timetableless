@@ -1,18 +1,18 @@
 'use strict'
 
 const { mock } = require('sinon')
-const { NotifyDelayService } = require("../lib/notifyDelayService")
+const { NotifyDelayAction } = require("../lib/notifyDelayAction")
 const { EmailNotifier } = require("../lib/emailNotifier")
 const stubLogger = () => {}
 
-describe('NotifyDelayService', () => {
+describe('NotifyDelayAction', () => {
   it('notify a registered user', async () => {
     const emailNotifier = new EmailNotifier()
     const notifier = mock(emailNotifier)
 
     notifier.expects('notify').withArgs('a@b.c', 'S001', 'departureStation', 1).once()
 
-    await new NotifyDelayService(emailNotifier, stubLogger).sendAll([registration(['a@b.c'], 'S001', 'departureStation', 1)])
+    await new NotifyDelayAction(emailNotifier, stubLogger).execute([registration(['a@b.c'], 'S001', 'departureStation', 1)])
 
     notifier.verify()
   })
@@ -24,7 +24,7 @@ describe('NotifyDelayService', () => {
     notifier.expects('notify').withArgs('a@b.c', 'S001', 'departureStation', 1).once()
     notifier.expects('notify').withArgs('d@e.f', 'S001', 'departureStation', 1).once()
 
-    await new NotifyDelayService(emailNotifier, stubLogger).sendAll([registration(['a@b.c','d@e.f'], 'S001', 'departureStation', 1)])
+    await new NotifyDelayAction(emailNotifier, stubLogger).execute([registration(['a@b.c','d@e.f'], 'S001', 'departureStation', 1)])
 
     notifier.verify()
   })
@@ -38,7 +38,7 @@ describe('NotifyDelayService', () => {
     notifier.expects('notify').withArgs('a@b.c', 'first', 'Trento', 1).once()
     notifier.expects('notify').withArgs('d@e.f', 'last', 'Rovereto', 2).once()
 
-    await new NotifyDelayService(emailNotifier, stubLogger).sendAll([first, last])
+    await new NotifyDelayAction(emailNotifier, stubLogger).execute([first, last])
 
     notifier.verify()
   })
