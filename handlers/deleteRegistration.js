@@ -2,6 +2,7 @@
 
 const { DeleteRegistrationAction } = require("../lib/deleteRegistrationAction")
 const { DeleteRegistrationEvent } = require("../lib/deleteRegistrationEvent")
+const { RegistrationRepository } = require("../lib/registrationRepository")
 
 function headers () {
   return {'Access-Control-Allow-Origin': '*'}
