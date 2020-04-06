@@ -76,9 +76,13 @@ functions:
     handler: ./handlers/deleteRegistration.handler
     events:
       - http:
-          path: /registration
-          method: DELETE
+          path: /registration/delete/{token}
+          method: GET
           cors: true
+          request:
+            parameters:
+              paths:
+                token: true
     package:
       include:
         - handlers/deleteRegistration.js
