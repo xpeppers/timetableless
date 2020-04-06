@@ -49,7 +49,8 @@ npm run logs -- -f <functionName> -t
    - [x] completare i test di DeleteRegistrationAction
    - [x] fixare tests e usare set per peopleToNotify
    - [x] implementare RegistrationRepository.delete
-   - [ ] implementare deleteRegistrationEvent
+   - [x] implementare deleteRegistrationEvent
+   - [ ] aggiungere link a delete registration ad ogni email
 - [ ] Migliorare interfaccia
     - [ ] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
     - [ ] Scelta di una delle opzioni e quando seleziono prendo Train e station

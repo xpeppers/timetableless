@@ -25,7 +25,6 @@ function error(err) {
 }
 
 module.exports.handler = async (event) => {
-  console.log(event)
   const deleteEvent = new DeleteRegistrationEvent(event)
   const action = new DeleteRegistrationAction(new RegistrationRepository())
 
