@@ -47,8 +47,8 @@ npm run logs -- -f <functionName> -t
 ## TODO
 - [ ] Cancellazione di una registrazione mediante link inviato via email
    - [x] completare i test di DeleteRegistrationAction
-   - [ ] fixare tests e usare set per peopleToNotify
-   - [ ] implementare RegistrationRepository.delete
+   - [x] fixare tests e usare set per peopleToNotify
+   - [x] implementare RegistrationRepository.delete
    - [ ] implementare deleteRegistrationEvent
 - [ ] Migliorare interfaccia
     - [ ] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
