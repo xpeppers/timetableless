@@ -18,7 +18,7 @@ custom:
     start:
       migrate: true
       inMemory: true
-      port: 3333
+      port: 4321
   client:
     bucketName: timetableless-${self:provider.stage}
 

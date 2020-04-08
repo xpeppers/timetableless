@@ -1,7 +1,7 @@
 'use strict'
 
 const { DeleteRegistrationAction } = require("../lib/deleteRegistrationAction")
-const { DeleteRegistrationEvent } = require("../lib/deleteRegistrationEvent")
+const { Token } = require("../lib/token")
 const { RegistrationRepository } = require("../lib/registrationRepository")
 
 function headers () {
@@ -26,10 +26,10 @@ function error(err) {
 }
 
 module.exports.handler = async (event) => {
-  const deleteEvent = new DeleteRegistrationEvent(event)
+  const token = Token.decode(event.pathParameters.token)
   const action = new DeleteRegistrationAction(new RegistrationRepository())
 
-  return action.execute(deleteEvent.trainNumber(), deleteEvent.timeSlot(), deleteEvent.email())
-  .then(respond)
-  .catch(error)
+  return action.execute(token.trainNumber, token.timeSlot, token.email)
+    .then(respond)
+    .catch(error)
 }
