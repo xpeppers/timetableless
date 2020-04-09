@@ -27,10 +27,14 @@ function error(err) {
 }
 
 module.exports.handler = async (event) => {
-  const registration = new AddRegistrationEvent(event)
-  const action = new AddRegistrationAction(new RegistrationRepository(), new Trenitalia())
+  try {
+    const registration = new AddRegistrationEvent(event)
+    const action = new AddRegistrationAction(new RegistrationRepository(), new Trenitalia())
 
-  return action.execute(registration.email(), registration.trainNumber(), registration.station())
-  .then(respond)
-  .catch(error)
+    let body = await action.execute(registration.email(), registration.trainNumber(), registration.station())
+
+    return respond(body)
+  } catch(err) {
+    return error(err)
+  }
 }

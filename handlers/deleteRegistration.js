@@ -26,10 +26,14 @@ function error(err) {
 }
 
 module.exports.handler = async (event) => {
-  const token = Token.decode(event.pathParameters.token)
-  const action = new DeleteRegistrationAction(new RegistrationRepository())
+  try {
+    const token = Token.decode(event.pathParameters.token)
+    const action = new DeleteRegistrationAction(new RegistrationRepository())
 
-  return action.execute(token.trainNumber, token.timeSlot, token.email)
-    .then(respond)
-    .catch(error)
+    let body = await action.execute(token.trainNumber, token.timeSlot, token.email)
+
+    return respond(body)
+  } catch(err) {
+    return error(err)
+  }
 }
