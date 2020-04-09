@@ -3,7 +3,7 @@
 const { RegistrationRepository } = require("../lib/registrationRepository")
 const { Trenitalia } = require("../lib/trenitalia")
 const { AddRegistrationAction } = require("../lib/addRegistrationAction")
-const { AddRegistrationEvent } = require("../lib/addregistrationEvent")
+const { AddRegistrationEvent } = require("../lib/addRegistrationEvent")
 
 function headers () {
   return {'Access-Control-Allow-Origin': '*'}
