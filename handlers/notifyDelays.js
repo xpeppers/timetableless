@@ -5,6 +5,7 @@ const { EmailNotifier } = require("../lib/emailNotifier")
 const { NotifyDelayAction } = require("../lib/notifyDelayAction")
 
 module.exports.handler = async (event) => {
+  console.log(event)
   const events = new DynamoDbEvent(event)
   const action = new NotifyDelayAction(new EmailNotifier('carriere@xpeppers.com'))
 
