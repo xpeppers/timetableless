@@ -1,3 +1,5 @@
+'use strict'
+
 const { deepEqual: equal } = require('assert')
 const axios = require('axios').default
 const { TestingDB } = require("../utils/testingDB")
