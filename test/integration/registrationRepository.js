@@ -1,11 +1,9 @@
 const { deepEqual: equal } = require("assert")
 const { DynamoDbClientBuilder } = require("../../lib/dynamoDbClientBuilder")
 const { RegistrationRepository } = require("../../lib/registrationRepository")
+const { TestingDB } = require("../utils/testingDB")
 const localClient = new DynamoDbClientBuilder(true).build()
-
-const { forEach } = require('../../lib/asyncHelper')
-
-const DB = new TestingDB()
+const DB = new TestingDB(localClient)
 
 describe('RegistrationRepository', () => {
   const repository = new RegistrationRepository(localClient)
@@ -97,52 +95,3 @@ describe('RegistrationRepository', () => {
     equal(afterDelete[0].peopleToNotify, ['another@user.com'])
   })
 })
-
-function TestingDB(dynamoDb = new DynamoDbClientBuilder(true).build()) {
-  function parseItem (item) {
-    item.peopleToNotify = (item.peopleToNotify) ? item.peopleToNotify.values : []
-    return item
-  }
-
-  this.cleanUp = () => {
-    return this.scanRecords().then(records => forEach(records, this.remove))
-  }
-
-  this.scanRecords = () => {
-    return new Promise((resolve, reject) => {
-      let tableName = `registrations-${process.env.stage}`
-      let params = {TableName: tableName}
-      dynamoDb.scan(params, function (err, data) {
-        if (err) {
-          reject(err)
-          return
-        }
-
-        if (!data || !data.Items) {
-          reject(new Error("Data has no Items field"))
-          return
-        }
-
-        resolve(data.Items.map(parseItem))
-      })
-    })
-  }
-
-  this.remove = (record) => {
-    return new Promise((resolve, reject) => {
-      let tableName = `registrations-${process.env.stage}`
-      var params = {
-        TableName: tableName,
-        Key: { 'timeSlot': record.timeSlot, 'trainNumber': record.trainNumber }
-      }
-
-      dynamoDb.delete(params, function(err) {
-        if (err) {
-          reject(err)
-        } else {
-          resolve('')
-        }
-      })
-    }).catch(console.log)
-  }
-}
