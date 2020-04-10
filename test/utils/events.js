@@ -1,7 +1,7 @@
 
 const defaultRegistration = {
   timeSlot: '13:56',
-  delay: 0,
+  delay: 1,
   trainNumber: '4640',
   departureStation: 'S00458',
   peopleToNotify: ['a@b.c'],

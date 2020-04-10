@@ -11,7 +11,7 @@
     "install:dynamodb": "serverless dynamodb install",
     "logs": "serverless logs",
     "remove": "sls remove --profile xpeppers-develop && sls client remove --profile xpeppers-develop",
-    "ses:local": "aws-ses-local --clean",
+    "ses:local": "aws-ses-local",
     "sls": "serverless",
     "start": "./scripts/start.sh",
     "test": "npm run test:unit && npm run test:integration",

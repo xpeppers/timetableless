@@ -1,36 +1,46 @@
 'use strict'
 
-const { SesClientBuilder } = require("../../lib/sesClientBuilder")
+const { deepEqual } = require("assert")
 const { testDynamoDbEvent } = require("../utils/events")
-const { TestingDB } = require("../utils/testingDB")
+const { TestingDB } = require("../utils/testingDb")
+const { TestingSES } = require("../utils/testingSes")
+const { TestingLambda } = require("../utils/testingLambda")
 const DB = new TestingDB()
-const { EmailNotifier } = require("../../lib/emailNotifier")
-const localClient = new SesClientBuilder(true).build()
+const SES = new TestingSES()
+const LAMBDA = new TestingLambda()
 
-describe('Registration', () => {
+
+describe('Notification', () => {
 
   beforeEach(async () => {
+    SES.cleanUp()
     await DB.cleanUp()
   })
 
-  it('something', async () => {
-    const { Lambda } = require('aws-sdk')
-    const lambda = new Lambda({ apiVersion: '2031', region: 'localhost', endpoint: 'http://localhost:3000' })
+  it('do not notify delays when delay not changed', async () => {
+    await LAMBDA.invoke("notifyDelays", testDynamoDbEvent.full(1, 1))
 
-    const params = {
-      FunctionName: 'timetableless-dev-notifyDelays',
-      InvocationType: 'Event',
-      Payload: JSON.stringify(testDynamoDbEvent.full(1, 4)),
+    deepEqual(SES.isReceived(), false)
+  })
+
+  it('Notify delays when changed', async () => {
+    const registration = {
+      timeSlot: '13:56',
+      delay: 1,
+      trainNumber: '4640',
+      departureStation: 'S00458',
+      peopleToNotify: ['a@b.c'],
+      departureTime: '13:57:25'
     }
 
-    await lambda.invoke(params).promise()
+    await LAMBDA.invoke("notifyDelays", testDynamoDbEvent.full(1, 4, registration))
 
-
-    // let notifier = new EmailNotifier('carriere@xpeppers.com', localClient)
-
-    // notifier.notify("pi@ppo.it", "123", "S001", 0, "token")
-    //   .then(console.log)
-    //   .catch(console.error)
+    deepEqual(SES.isReceived(), true)
+    let message = SES.received()
+    deepEqual(message.headers.Source, "carriere@xpeppers.com")
+    deepEqual(message.headers.Subject, "News about your train")
+    deepEqual(message.headers.ToAddress, "a@b.c")
+    deepEqual(message.body, '<p>The train 4640 will leave from station S00458 with a delay of 4 minutes.</p><br /><p style="font-size: 10px;">To unregister, <a href="http://localhost:3001/registration/delete/MTM6NTZ8NDY0MHxhQGIuYw==">click here</a>.</p>')
   })
 })
 
