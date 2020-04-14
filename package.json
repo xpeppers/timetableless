@@ -14,6 +14,7 @@
     "ses:local": "aws-ses-local",
     "sls": "serverless",
     "start": "./scripts/start.sh",
+    "start:client": "sh -c 'cd client && npm start && cd -'",
     "test": "npm run test:unit && npm run test:integration",
     "test:acceptance": "npm start -- --exec 'mocha test/acceptance/**/*'",
     "test:integration": "npm start -- --exec 'mocha test/integration/**/*'",

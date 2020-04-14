@@ -57,7 +57,7 @@ npm run logs -- -f <functionName> -t
     - [ ] Scelta di una delle opzioni e quando seleziono prendo Train e station
     - [ ] Migliorare il messaggio che viene inviato
 - [x] Diversi ambienti (dev)
-- [ ] Test accettazione se possibile quantomeno avvicinarsi
+- [x] Test accettazione se possibile quantomeno avvicinarsi
 - [x] Pipeline
 - [x] SES abilitato al mondo?
 - [ ] Monitoring?

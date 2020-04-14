@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "watch": "sh -c 'NODE_ENV=$0 parcel watch src/*'",
     "build": "sh -c 'NODE_ENV=$0 parcel build src/*'",
-    "deploy": "sh -c 'npm run build $0 && aws s3 sync dist \"s3://timetableless-$0\"'"
+    "deploy": "sh -c 'npm run build $0 && aws s3 sync dist \"s3://timetableless-$0\"'",
+    "start": "npm run watch -- local & serve dist"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dallagi/timetableless.git"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "serve": "^11.3.0"
   }
 }
