@@ -2,29 +2,57 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+      .autocomplete-suggestions {
+          text-align: left; cursor: default; border: 1px solid #ccc; border-top: 0; background: #fff; box-shadow: -1px 1px 3px rgba(0,0,0,.1);
+
+          /* core styles should not be changed */
+          position: absolute; display: none; z-index: 9999; max-height: 254px; overflow: hidden; overflow-y: auto; box-sizing: border-box;
+      }
+      .autocomplete-suggestion { position: relative; padding: 0 .6em; line-height: 23px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1.02em; color: #333; }
+      .autocomplete-suggestion b { font-weight: normal; color: #1f8dd6; }
+      .autocomplete-suggestion.selected { background: #f0f0f0; }
+    </style>
   </head>
   <body>
     <form id="form">
-      <p>AAAEmail:</p>
+      <p>Email:</p>
       <input type="email" id="email"></input>
 
       <p>Train number:</p>
       <input type="text" id="train-number"></input>
 
       <p>Stazione di partenza:</p>
-      <input type="text" id="station"></input>
+      <input type="text" id="station" style="width: 80%;"></input>
+      <input type="hidden" id="stationId"></input>
 
       <br />
       <button type="button" id="submit-button">Register</button>
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
 
     <script type="text/javascript">
+      new autoComplete({
+          selector: '#station',
+          source: function(term, response) {
+            axios.get(`${process.env.BACKEND_HOST}/stations/autocomplete/${term}`).then(function(result) { response(result.data) })
+          },
+          renderItem: function (item, search){
+            let [id, name] = item.split(" | ")
+            return `<div class="autocomplete-suggestion" data-id="${id}" data-name="${name}" data-val="${name}">${name}</div>`
+          },
+          onSelect: function(e, term, item) {
+            document.querySelector("#stationId").setAttribute("value", item.getAttribute('data-id'))
+          }
+      })
+
+
       document.querySelector("#submit-button").addEventListener('click', function(e) {
         var email = document.querySelector("#email").value
         var trainNumber = document.querySelector("#train-number").value
-        var station = document.querySelector("#station").value
+        var station = document.querySelector("#stationId").value
 
         axios.post(`${process.env.BACKEND_HOST}/registration`, {email: email, trainNumber: trainNumber, station: station})
           .then(function(result) {

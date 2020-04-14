@@ -84,9 +84,21 @@ functions:
             parameters:
               paths:
                 token: true
+
+  autocompleteStation:
+    handler: ./handlers/autocompleteStation.handler
+    events:
+      - http:
+          path: /stations/autocomplete/{term}
+          method: GET
+          cors: true
+          request:
+            parameters:
+              paths:
+                term: true
     package:
       include:
-        - handlers/deleteRegistration.js
+        - handlers/autocompleteStation.js
 
 resources:
   Resources:
