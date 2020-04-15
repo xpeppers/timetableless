@@ -34,6 +34,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
 
     <script type="text/javascript">
+      let stationId = document.querySelector("#stationId")
+
       new autoComplete({
           selector: '#station',
           source: function(term, response) {
@@ -41,18 +43,26 @@
           },
           renderItem: function (item, search){
             let [id, name] = item.split(" | ")
-            return `<div class="autocomplete-suggestion" data-id="${id}" data-name="${name}" data-val="${name}">${name}</div>`
+            return `<div class="autocomplete-suggestion" data-id="${id}" data-val="${name}">${name}</div>`
           },
           onSelect: function(e, term, item) {
-            document.querySelector("#stationId").setAttribute("value", item.getAttribute('data-id'))
+            stationId.setAttribute("value", item.getAttribute('data-id'))
+            stationId.setAttribute("name", item.getAttribute('data-val'))
           }
       })
 
+      document.querySelector("#station").addEventListener("change", function(e) {
+        let valueChanged = e.target.value !== document.querySelector("#stationId").getAttribute('name')
+        if(valueChanged) {
+          stationId.setAttribute("value", "")
+          stationId.setAttribute("name", "")
+        }
+      })
 
       document.querySelector("#submit-button").addEventListener('click', function(e) {
         var email = document.querySelector("#email").value
         var trainNumber = document.querySelector("#train-number").value
-        var station = document.querySelector("#stationId").value
+        var station = stationId.value
 
         axios.post(`${process.env.BACKEND_HOST}/registration`, {email: email, trainNumber: trainNumber, station: station})
           .then(function(result) {
