@@ -3,14 +3,17 @@
 const { Trenitalia } = require("../lib/trenitalia")
 
 function headers () {
-  return {'Access-Control-Allow-Origin': '*'}
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Content-type': 'text/plain'
+  }
 }
 
 function respond(body) {
   console.log("RESPONDED WITH:" + body)
   return {
     statusCode: 200,
-    body: JSON.stringify(body),
+    body,
     headers: headers()
   }
 }

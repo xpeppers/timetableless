@@ -39,10 +39,14 @@
       new autoComplete({
           selector: '#station',
           source: function(term, response) {
-            axios.get(`${process.env.BACKEND_HOST}/stations/autocomplete/${term}`).then(function(result) { response(result.data) })
+            axios
+              .get(`${process.env.BACKEND_HOST}/stations/autocomplete/${term}`)
+              .then(function(result) {
+                response(result.data.split("\n"))
+              })
           },
           renderItem: function (item, search){
-            let [id, name] = item.split(" | ")
+            let [name, id] = item.split("|")
             return `<div class="autocomplete-suggestion" data-id="${id}" data-val="${name}">${name}</div>`
           },
           onSelect: function(e, term, item) {
