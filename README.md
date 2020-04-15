@@ -53,9 +53,10 @@ npm run logs -- -f <functionName> -t
    - [x] aggiungere link a delete registration ad ogni email
    - [ ] testare handlers
 - [ ] Migliorare interfaccia
-    - [ ] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
+    - [x] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
     - [ ] Scelta di una delle opzioni e quando seleziono prendo Train e station
     - [ ] Migliorare il messaggio che viene inviato
+    - [ ] Se treno non e' trenitalia (es. OBB con trainNumber 85) pensare a come gestirlo (dare 400 a utente?)
 - [x] Diversi ambienti (dev)
 - [x] Test accettazione se possibile quantomeno avvicinarsi
 - [x] Pipeline
