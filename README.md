@@ -54,10 +54,11 @@ npm run logs -- -f <functionName> -t
    - [ ] testare handlers
 - [ ] Migliorare interfaccia
     - [x] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
-    - [ ] Migliorare il messaggio che viene inviato
+    - [ ] Migliorare feedback a utente
     - [ ] Se treno non e' trenitalia (es. OBB con trainNumber 85) pensare a come gestirlo (dare 400 a utente?)
-    - [ ] Fare una grafica decente
-    - [ ] Trim spazi input
+    - [x] Fare una grafica decente
+    - [x] Trim spazi input
+    - [ ] Uniformare la lingua (tutto in italiano)
 - [x] Diversi ambienti (dev)
 - [x] Test accettazione se possibile quantomeno avvicinarsi
 - [x] Pipeline
