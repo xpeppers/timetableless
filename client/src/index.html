@@ -64,8 +64,8 @@
       })
 
       document.querySelector("#submit-button").addEventListener('click', function(e) {
-        var email = document.querySelector("#email").value
-        var trainNumber = document.querySelector("#train-number").value
+        var email = document.querySelector("#email").value.trim()
+        var trainNumber = document.querySelector("#train-number").value.trim()
         var station = stationId.value
 
         axios.post(`${process.env.BACKEND_HOST}/registration`, {email: email, trainNumber: trainNumber, station: station})
