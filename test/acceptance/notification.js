@@ -1,6 +1,6 @@
 'use strict'
 
-const { deepEqual } = require("assert")
+const { equal, deepEqual } = require("assert")
 const { testDynamoDbEvent } = require("../utils/events")
 const { TestingDB } = require("../utils/testingDb")
 const { TestingSES } = require("../utils/testingSes")
@@ -20,7 +20,7 @@ describe('Notification', () => {
   it('do not notify delays when delay not changed', async () => {
     await LAMBDA.invoke("notifyDelays", testDynamoDbEvent.full(1, 1))
 
-    deepEqual(SES.isReceived(), false)
+    equal(SES.isReceived(), false)
   })
 
   it('Notify delays when changed', async () => {

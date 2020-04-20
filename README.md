@@ -55,7 +55,7 @@ npm run logs -- -f <functionName> -t
 - [ ] Migliorare interfaccia
     - [x] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
     - [ ] Migliorare feedback a utente
-    - [ ] Se treno non e' trenitalia (es. OBB con trainNumber 85) pensare a come gestirlo (dare 400 a utente?)
+    - [ ] Aggiungere avviso che il servizio funziona solo con treni italiani con stazioni italiane
     - [x] Fare una grafica decente
     - [x] Trim spazi input
     - [ ] Uniformare la lingua (tutto in italiano)
@@ -63,6 +63,7 @@ npm run logs -- -f <functionName> -t
 - [x] Test accettazione se possibile quantomeno avvicinarsi
 - [x] Pipeline
 - [x] SES abilitato al mondo?
+- [ ] Migliorare il readme
 - [ ] Monitoring?
 
 ## Scenario

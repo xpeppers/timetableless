@@ -9,10 +9,10 @@ function headers () {
   return {'Access-Control-Allow-Origin': '*'}
 }
 
-function respond(body) {
+function respond() {
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: body }),
+    body: JSON.stringify({ message: 'registered' }),
     headers: headers()
   }
 }
@@ -31,9 +31,9 @@ module.exports.handler = async (event) => {
     const registration = new AddRegistrationEvent(event)
     const action = new AddRegistrationAction(new RegistrationRepository(), new Trenitalia())
 
-    let body = await action.execute(registration.email(), registration.trainNumber(), registration.station())
+    await action.execute(registration.email(), registration.trainNumber(), registration.station())
 
-    return respond(body)
+    return respond()
   } catch(err) {
     return error(err)
   }

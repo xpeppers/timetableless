@@ -14,11 +14,22 @@ describe('Registration', () => {
   it('Registers a new user for a new station', async () => {
     let response = await axios.post("http://localhost:3000/registration", {email: 'pippo', trainNumber:'4640', station:'S00461'})
 
-    equal(response.data, { message: "'pippo' registered with response: ({\"trainNumber\":\"4640\",\"departureStation\":\"S00461\",\"peopleToNotify\":[\"pippo\"],\"timeSlot\":\"05:24\",\"departureTime\":\"05:25:00\",\"delay\":0})" })
+    equal(response.data, { message: "registered" })
 
     let registrations = await DB.scanRecords()
     equal(registrations.length, 1)
     equal(registrations[0].peopleToNotify, ['pippo'])
+  })
+
+  it('Registers same user for a new station twice', async () => {
+    await axios.post("http://localhost:3000/registration", {email: 'pippo', trainNumber:'4640', station:'S00461'})
+    let response = await axios.post("http://localhost:3000/registration", {email: 'pippo', trainNumber:'4640', station:'S00461'})
+
+    let registrations = await DB.scanRecords()
+    equal(registrations.length, 1)
+    equal(registrations[0].peopleToNotify, ['pippo'])
+
+    equal(response.data, { message: "registered" })
   })
 
   it('Fails to register a new user for a new station', async () => {
