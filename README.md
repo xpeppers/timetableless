@@ -54,7 +54,9 @@ npm run logs -- -f <functionName> -t
    - [ ] testare handlers
 - [ ] Migliorare interfaccia
     - [x] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
-    - [ ] Migliorare feedback a utente
+    - [ ] Aggiungere spinner mentre fa la chiamata di registraizone
+    - [ ] Invece che Alert fare altro tipo di messaggio di successo
+    - [ ] Discriminare tra errore dati input errati e altro errore generico
     - [ ] Aggiungere avviso che il servizio funziona solo con treni italiani con stazioni italiane
     - [x] Fare una grafica decente
     - [x] Trim spazi input
