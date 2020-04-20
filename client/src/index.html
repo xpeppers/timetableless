@@ -64,7 +64,7 @@
         <!--Right Col-->
         <div class="w-full xl:w-1/2 py-6 overflow-y-hidden">
           <div class="max-w-xs w-full mx-auto slide-in-bottom">
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border">
 
               <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="train-number">
@@ -89,6 +89,7 @@
               </div>
 
               <div class="flex items-center justify-between">
+                <p class="text-red-500 text-xs italic error-message"></p>
                 <button id="submit-button" class="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                   Register
                 </button>
@@ -112,8 +113,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
 
     <script type="text/javascript">
+      function showError(message) {
+        let formClasses = document.querySelector("form").classList
+        formClasses.add("border-red-500")
+        document.querySelector(".error-message").innerHTML = message
+      }
+
+      function hideError() {
+        let formClasses = document.querySelector("form").classList
+        formClasses.remove("border-red-500")
+        document.querySelector(".error-message").innerHTML = ""
+      }
+
+      document.querySelectorAll("form input").forEach(function(element) {
+        element.addEventListener("focus", hideError)
+      })
+
       let stationId = document.querySelector("#stationId")
-      console.log(stationId)
 
       new autoComplete({
           selector: '#station',
@@ -134,12 +150,11 @@
           }
       })
 
-      document.querySelector("#station").addEventListener("change", function(e) {
-        let valueChanged = e.target.value !== document.querySelector("#stationId").getAttribute('name')
-        if(valueChanged) {
-          stationId.setAttribute("value", "")
-          stationId.setAttribute("name", "")
-        }
+      document.querySelector("#station").addEventListener("blur", function(e) {
+        console.log(e.target)
+        e.target.value = stationId.getAttribute('name')
+        e.target.setAttribute("data-id", stationId.getAttribute('value'))
+        e.target.setAttribute("data-val", stationId.getAttribute('name'))
       })
 
       document.querySelector("#submit-button").addEventListener('click', function(e) {
@@ -153,8 +168,7 @@
             document.querySelector("#form").reset()
           })
           .catch(function(error) {
-            alert(error.response.status + ":" + error.response.data.message)
-            document.querySelector("#form").reset()
+            showError("I valori inseriti non sono validi")
           })
       })
     </script>
