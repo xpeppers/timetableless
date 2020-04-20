@@ -130,6 +130,7 @@
       })
 
       let stationId = document.querySelector("#stationId")
+      console.log(stationId)
 
       new autoComplete({
           selector: '#station',
@@ -150,6 +151,13 @@
           }
       })
 
+      document.querySelector("#station").addEventListener("change", function(e) {
+        if(e.target.value === "") {
+          stationId.setAttribute("value", "")
+          stationId.setAttribute("name", "")
+        }
+      })
+
       document.querySelector("#station").addEventListener("blur", function(e) {
         console.log(e.target)
         e.target.value = stationId.getAttribute('name')
@@ -165,7 +173,7 @@
         axios.post(`${process.env.BACKEND_HOST}/registration`, {email: email, trainNumber: trainNumber, station: station})
           .then(function(result) {
             alert(result.data.message)
-            document.querySelector("#form").reset()
+            document.querySelector("form").reset()
           })
           .catch(function(error) {
             showError("I valori inseriti non sono validi")
