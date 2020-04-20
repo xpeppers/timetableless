@@ -20,9 +20,10 @@ function TestingSES() {
   }
 
   this.cleanUp = () => {
-    let p = path.resolve(__dirname, "../../output", today())
+    let p = path.resolve(__dirname, "../../output")
     try {
       deleteFolderRecursive(p)
+      fs.mkdirSync(path.resolve(__dirname, "../../output"))
     } catch(e) {
       console.log("**************************")
       console.log(e)
