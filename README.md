@@ -51,6 +51,7 @@ npm run logs -- -f <functionName> -t
    - [x] implementare RegistrationRepository.delete
    - [x] implementare deleteRegistrationEvent
    - [x] aggiungere link a delete registration ad ogni email
+   - [ ] fixare in dev l'errore Internal Sever Error
    - [ ] testare handlers
 - [ ] Migliorare interfaccia
     - [x] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
