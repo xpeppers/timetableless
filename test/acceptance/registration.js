@@ -3,6 +3,7 @@
 const { deepEqual: equal } = require('assert')
 const axios = require('axios').default
 const { TestingDB } = require("../utils/testingDB")
+const { Token } = require("../../lib/token")
 const DB = new TestingDB()
 
 describe('Registration', () => {
@@ -40,5 +41,17 @@ describe('Registration', () => {
       equal(error.response.status, 400)
       equal(error.response.data, { message: "Enter valid values" })
     }
+  })
+
+  it.only('Deletes a registration', async () => {
+      await axios.post("http://localhost:3000/registration", {email: 'pippo', trainNumber:'4640', station:'S00461'})
+      let registrations = await DB.scanRecords()
+
+      let token = Token.encode(registrations[0].timeSlot, registrations[0].trainNumber, registrations[0].peopleToNotify[0])
+      let response = await axios.get(`http://localhost:3000/registration/delete/${token}`)
+
+      equal(response.status, 200)
+      let remainingRegistrations = await DB.scanRecords()
+      equal(remainingRegistrations, [])
   })
 })

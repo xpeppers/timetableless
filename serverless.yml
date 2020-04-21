@@ -84,6 +84,9 @@ functions:
             parameters:
               paths:
                 token: true
+    package:
+      include:
+        - handlers/deleteRegistration.js
 
   autocompleteStation:
     handler: ./handlers/autocompleteStation.handler
