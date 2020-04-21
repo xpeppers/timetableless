@@ -51,14 +51,14 @@ npm run logs -- -f <functionName> -t
    - [x] implementare RegistrationRepository.delete
    - [x] implementare deleteRegistrationEvent
    - [x] aggiungere link a delete registration ad ogni email
-   - [ ] fixare in dev l'errore Internal Sever Error
+   - [x] fixare in dev l'errore Internal Sever Error
    - [ ] testare handlers
 - [ ] Migliorare interfaccia
     - [x] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
-    - [ ] Aggiungere spinner mentre fa la chiamata di registraizone
-    - [ ] Invece che Alert fare altro tipo di messaggio di successo
-    - [ ] Discriminare tra errore dati input errati e altro errore generico
-    - [ ] Aggiungere avviso che il servizio funziona solo con treni italiani con stazioni italiane
+    - [-] Aggiungere spinner mentre fa la chiamata di registrazione
+    - [x] Invece che Alert fare altro tipo di messaggio di successo
+    - [x] Discriminare tra errore dati input errati e altro errore generico
+    - [-] Aggiungere avviso che il servizio funziona solo con treni italiani con stazioni italiane
     - [x] Fare una grafica decente
     - [x] Trim spazi input
     - [ ] Uniformare la lingua (tutto in italiano)

@@ -64,38 +64,48 @@
         <!--Right Col-->
         <div class="w-full xl:w-1/2 py-6 overflow-y-hidden">
           <div class="max-w-xs w-full mx-auto slide-in-bottom">
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border">
-
-              <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="train-number">
-                  Train number
-                </label>
-                <input type="text" id="train-number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Train number">
+            <div id="form" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border transition-all duration-250 ease-in-out">
+              <div class="succeeded transition-all duration-250 ease-in-out hidden">
+                <div class="mb-4 py-20">
+                  <h4 class="text-purple-700 text-xl">Registrazione effettuata<br />con successo</h4>
+                </div>
+                <div class="flex items-center justify-between pt-3">
+                  <button id="register-again" class="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Registrati di nuovo
+                  </button>
+                </div>
               </div>
+              <div class="inputs transition-all duration-250 ease-in-out">
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="train-number">
+                    Train number
+                  </label>
+                  <input type="text" id="train-number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Train number">
+                </div>
 
-              <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="station">
-                  Station
-                </label>
-                <input type="text" id="station" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Station name">
-                <input type="hidden" id="stationId"></input>
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="station">
+                    Station
+                  </label>
+                  <input type="text" id="station" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Station name">
+                  <input type="hidden" id="stationId"></input>
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                    Email
+                  </label>
+                  <input type="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="your@email">
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <p class="text-red-500 text-xs italic error-message"></p>
+                  <button id="submit-button" class="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Register
+                  </button>
+                </div>
               </div>
-
-              <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                  Email
-                </label>
-                <input type="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="your@email">
-              </div>
-
-              <div class="flex items-center justify-between">
-                <p class="text-red-500 text-xs italic error-message"></p>
-                <button id="submit-button" class="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                  Register
-                </button>
-              </div>
-
-            </form>
+            </div>
           </div>
         </div>
 
@@ -114,23 +124,22 @@
 
     <script type="text/javascript">
       function showError(message) {
-        let formClasses = document.querySelector("form").classList
+        let formClasses = document.querySelector("#form").classList
         formClasses.add("border-red-500")
         document.querySelector(".error-message").innerHTML = message
       }
 
       function hideError() {
-        let formClasses = document.querySelector("form").classList
+        let formClasses = document.querySelector("#form").classList
         formClasses.remove("border-red-500")
         document.querySelector(".error-message").innerHTML = ""
       }
 
-      document.querySelectorAll("form input").forEach(function(element) {
+      document.querySelectorAll("#form input").forEach(function(element) {
         element.addEventListener("focus", hideError)
       })
 
       let stationId = document.querySelector("#stationId")
-      console.log(stationId)
 
       new autoComplete({
           selector: '#station',
@@ -166,18 +175,43 @@
       })
 
       document.querySelector("#submit-button").addEventListener('click', function(e) {
+        e.target.classList.remove("bg-purple-700")
+        e.target.classList.remove("hover:bg-purple-900")
+        e.target.classList.add("bg-purple-500")
+        e.target.classList.add("hover:bg-purple-500")
+        e.target.setAttribute("disabled", "disabled")
         var email = document.querySelector("#email").value.trim()
         var trainNumber = document.querySelector("#train-number").value.trim()
         var station = stationId.value
 
         axios.post(`${process.env.BACKEND_HOST}/registration`, {email: email, trainNumber: trainNumber, station: station})
           .then(function(result) {
-            alert(result.data.message)
-            document.querySelector("form").reset()
+            document.querySelector(".succeeded").classList.remove("hidden")
+            document.querySelector(".inputs").classList.add("hidden")
+            document.querySelector("#train-number").value = ""
+            document.querySelector("#station").value = ""
+            document.querySelector("#stationId").setAttribute("value", "")
+            document.querySelector("#stationId").setAttribute("name", "")
+
+            e.target.removeAttribute("disabled", false)
+            e.target.classList.add("bg-purple-700")
+            e.target.classList.add("hover:bg-purple-900")
+            e.target.classList.remove("bg-purple-500")
+            e.target.classList.remove("hover:bg-purple-500")
           })
           .catch(function(error) {
             showError("I valori inseriti non sono validi")
+            e.target.removeAttribute("disabled", false)
+            e.target.classList.add("bg-purple-700")
+            e.target.classList.add("hover:bg-purple-900")
+            e.target.classList.remove("bg-purple-500")
+            e.target.classList.remove("hover:bg-purple-500")
           })
+      })
+
+      document.querySelector("#register-again").addEventListener('click', function(e) {
+        document.querySelector(".succeeded").classList.add("hidden")
+        document.querySelector(".inputs").classList.remove("hidden")
       })
     </script>
 
