@@ -52,7 +52,7 @@ npm run logs -- -f <functionName> -t
    - [x] implementare deleteRegistrationEvent
    - [x] aggiungere link a delete registration ad ogni email
    - [x] fixare in dev l'errore Internal Sever Error
-   - [ ] dopo la cancellazione rimandare al frontend (magari con un messaggio: registrazione cancellata con successo)
+   - [ ] (fatto da testare) dopo la cancellazione rimandare al frontend (magari con un messaggio: registrazione cancellata con successo)
    - [ ] testare handlers
 - [ ] Migliorare interfaccia
     - [x] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
@@ -62,7 +62,7 @@ npm run logs -- -f <functionName> -t
     - [-] Aggiungere avviso che il servizio funziona solo con treni italiani con stazioni italiane
     - [x] Fare una grafica decente
     - [x] Trim spazi input
-    - [ ] Uniformare la lingua (tutto in italiano)
+    - [x] Uniformare la lingua (tutto in italiano)
 - [x] Diversi ambienti (dev)
 - [x] Test accettazione se possibile quantomeno avvicinarsi
 - [x] Pipeline

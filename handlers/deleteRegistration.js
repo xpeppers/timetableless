@@ -4,24 +4,27 @@ const { DeleteRegistrationAction } = require("../lib/deleteRegistrationAction")
 const { Token } = require("../lib/token")
 const { RegistrationRepository } = require("../lib/registrationRepository")
 
-function headers () {
-  return {'Access-Control-Allow-Origin': '*'}
+function headers (redirectTo) {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Location': `${process.env.frontend_host}/${redirectTo}`
+  }
 }
 
 function respond(body) {
   return {
-    statusCode: 200,
+    statusCode: 302,
     body: JSON.stringify({ message: body }),
-    headers: headers()
+    headers: headers('delete-successful.html')
   }
 }
 
 function error(err) {
   console.log("ERROR: ", err)
   return {
-    statusCode: 400,
+    statusCode: 302,
     body: JSON.stringify({ message: err.message }),
-    headers: headers()
+    headers: headers('delete-failed.html')
   }
 }
 

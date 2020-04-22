@@ -41,6 +41,7 @@ provider:
   environment:
     stage: ${self:provider.stage}
     base_host: { "Fn::Join" : ["", [" https://", { "Ref" : "ApiGatewayRestApi" }, ".execute-api.eu-west-1.amazonaws.com/${self:provider.stage}" ] ]  }
+    frontend_host: http://timetableless-${self:provider.stage}.s3-website-eu-west-1.amazonaws.com
 
 functions:
   updateDelays:
