@@ -29,7 +29,6 @@ function error(err) {
 
 module.exports.handler = async (event) => {
   try {
-    return respond(process.env.frontend_host)
     return respond(await new Trenitalia().autocompleteStation(event.pathParameters.term))
   } catch(err) {
     return error(err)
