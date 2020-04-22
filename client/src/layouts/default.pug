@@ -1,0 +1,35 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  title Timetableless
+  meta(name='description' content='Track the delays for your train')
+  meta(name='keywords' content='trenitalia,timetable,alert,delays')
+  link(rel='stylesheet' href='https://unpkg.com/tailwindcss/dist/tailwind.min.css')
+  link(rel='stylesheet' href='timetableless.css')
+  link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet')
+.h-screen.pb-14.bg-right.bg-cover(style="background-image:url('bg.svg');")
+  // Main
+  .container.pt-24.px-6.mx-auto.flex.flex-wrap.flex-col.items-center(class='md:pt-48 md:flex-row')
+    // Left Col
+    .flex.flex-col.w-full.justify-center.overflow-y-hidden(class='xl:w-1/2 lg:items-start')
+      h1.my-4.text-3xl.text-purple-800.font-bold.leading-tight.text-center.slide-in-bottom-h1(class='md:text-5xl md:text-left') Monitora il ritardo del tuo treno
+      p.leading-normal.text-base.mb-8.text-center.slide-in-bottom-subtitle(class='md:text-2xl md:text-left')
+        | Ti invieremo una notifica via email ogni volta che ci sar&agrave; un cambiamento nel ritardo.
+    // Right Col
+    .w-full.py-6.overflow-y-hidden(class='xl:w-1/2')
+      .max-w-xs.w-full.mx-auto.slide-in-bottom
+        #form.bg-white.shadow-md.rounded.px-8.pt-6.pb-8.mb-4.border.transition-all.duration-250.ease-in-out
+          block content
+
+    // Footer
+    .w-full.pt-16.pb-6.text-sm.text-center.fade-in(class='md:text-left')
+      a.text-gray-500.no-underline(class='hover:no-underline' href='#')
+        | Made with 
+        span(style='color: red') &#x2764;&#xFE0E;
+        |  by Team Vega @ XPeppers
+script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js')
+script(src='timetableless.js').
+

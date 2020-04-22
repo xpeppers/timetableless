@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "sh -c 'NODE_ENV=$0 parcel watch src/*'",
-    "build": "sh -c 'NODE_ENV=$0 parcel build src/*'",
+    "watch": "sh -c 'NODE_ENV=$0 parcel watch src/*.pug'",
+    "build": "sh -c 'NODE_ENV=$0 parcel build src/*.pug'",
     "deploy": "sh -c 'npm run build $0 && aws s3 sync dist \"s3://timetableless-$0\"'",
     "start": "npm run watch -- local & serve dist"
   },
