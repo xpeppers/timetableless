@@ -1,0 +1,12 @@
+extends layouts/default.pug
+
+block content
+  .succeeded.transition-all.duration-250.ease-in-out
+    .mb-4.py-20
+      h4.text-purple-700.text-xl
+        | Registrazione eliminata
+        br
+        | con successo
+    .flex.items-center.justify-between.pt-3
+      a#register-again.bg-purple-700.text-white.font-bold.py-2.px-4.rounded(href="/" class='hover:bg-purple-900 focus:outline-none focus:shadow-outline' type='button')
+        | Registrati di nuovo
