@@ -40,7 +40,7 @@ describe('Notification', () => {
     deepEqual(message.headers.Source, "carriere@xpeppers.com")
     deepEqual(message.headers.Subject, "Aggiornamenti sul tuo treno")
     deepEqual(message.headers.ToAddress, "a@b.c")
-    deepEqual(message.body, "<p>Il Treno 4640 lascerà la stazione S00458 con un ritardo di 4 minuti.</p><br /><br /><p style=\"font-size: 10px;\">Per eliminare la registrazione, <a href=\"http://localhost:3001/registration/delete/MTM6NTZ8NDY0MHxhQGIuYw==\">clicca qui</a>.</p>")
+    deepEqual(message.body, "<p>Il Treno '4640 - TORINO STURA' lascerà la stazione 'VILLANOVA' con un ritardo di 4 minuti.</p><br /><br /><p style=\"font-size: 10px;\">Per eliminare la registrazione, <a href=\"http://localhost:3001/registration/delete/MTM6NTZ8NDY0MHxhQGIuYw==\">clicca qui</a>.</p>")
   })
 })
 
