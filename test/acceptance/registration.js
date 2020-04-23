@@ -43,7 +43,7 @@ describe('Registration', () => {
     }
   })
 
-  it.only('Deletes a registration', async () => {
+  it('Deletes a registration', async () => {
       await axios.post("http://localhost:3000/registration", {email: 'pippo', trainNumber:'4640', station:'S00461'})
       let registrations = await DB.scanRecords()
 

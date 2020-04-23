@@ -38,9 +38,9 @@ describe('Notification', () => {
     deepEqual(SES.isReceived(), true)
     let message = SES.received()
     deepEqual(message.headers.Source, "carriere@xpeppers.com")
-    deepEqual(message.headers.Subject, "News about your train")
+    deepEqual(message.headers.Subject, "Aggiornamenti sul tuo treno")
     deepEqual(message.headers.ToAddress, "a@b.c")
-    deepEqual(message.body, '<p>The train 4640 will leave from station S00458 with a delay of 4 minutes.</p><br /><p style="font-size: 10px;">To unregister, <a href="http://localhost:3001/registration/delete/MTM6NTZ8NDY0MHxhQGIuYw==">click here</a>.</p>')
+    deepEqual(message.body, "<p>Il Treno 4640 lascerà la stazione S00458 con un ritardo di 4 minuti.</p><br /><br /><p style=\"font-size: 10px;\">Per eliminare la registrazione, <a href=\"http://localhost:3001/registration/delete/MTM6NTZ8NDY0MHxhQGIuYw==\">clicca qui</a>.</p>")
   })
 })
 

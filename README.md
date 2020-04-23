@@ -52,7 +52,7 @@ npm run logs -- -f <functionName> -t
    - [x] implementare deleteRegistrationEvent
    - [x] aggiungere link a delete registration ad ogni email
    - [x] fixare in dev l'errore Internal Sever Error
-   - [ ] (fatto da testare) dopo la cancellazione rimandare al frontend (magari con un messaggio: registrazione cancellata con successo)
+   - [x] (fatto da testare) dopo la cancellazione rimandare al frontend (magari con un messaggio: registrazione cancellata con successo)
    - [ ] testare handlers
 - [ ] Migliorare interfaccia
     - [x] Autocompletamento della stazione (con ora di partenza e stazione + stazione di arrivo)
