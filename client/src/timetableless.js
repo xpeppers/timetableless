@@ -22,7 +22,7 @@ new autoComplete({
     axios
       .get(`${process.env.BACKEND_HOST}/stations/autocomplete/${term}`)
       .then(function(result) {
-        response(result.data.split("\\n"))
+        response(result.data.split("\n"))
       })
   },
 
