@@ -1,6 +1,6 @@
 'use strict'
 
-const { deepEqual: equal } = require('assert')
+const { ok, deepEqual: equal } = require('assert')
 const axios = require('axios').default
 const { TestingDB } = require("../utils/testingDB")
 const { Token } = require("../../lib/token")
@@ -48,10 +48,23 @@ describe('Registration', () => {
       let registrations = await DB.scanRecords()
 
       let token = Token.encode(registrations[0].timeSlot, registrations[0].trainNumber, registrations[0].peopleToNotify[0])
-      let response = await axios.get(`http://localhost:3000/registration/delete/${token}`)
 
-      equal(response.status, 200)
+      let response = await axios.get(`http://localhost:3000/registration/delete/${token}`, {maxRedirects:0}).catch((error) => Promise.resolve(error.response))
+
+      equal(response.status, 302)
+      ok(response.headers.location.endsWith("/delete-successful.html"))
       let remainingRegistrations = await DB.scanRecords()
       equal(remainingRegistrations, [])
+  })
+
+  it('Fails to delete a registration', async () => {
+      await axios.post("http://localhost:3000/registration", {email: 'pippo', trainNumber:'4640', station:'S00461'})
+
+      let response = await axios.get(`http://localhost:3000/registration/delete/invalidtoken`, {maxRedirects:0}).catch((error) => Promise.resolve(error.response))
+
+      equal(response.status, 302)
+      ok(response.headers.location.endsWith("/delete-failed.html"))
+      let remainingRegistrations = await DB.scanRecords()
+      equal(remainingRegistrations.length, 1)
   })
 })
