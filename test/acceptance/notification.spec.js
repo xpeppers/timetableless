@@ -18,7 +18,7 @@ describe('Notification', () => {
   })
 
   it('do not notify delays when delay not changed', async () => {
-    await LAMBDA.invoke("notifyDelays", testDynamoDbEvent.full(1, 1))
+    await LAMBDA.invoke("notifyDelays",   testDynamoDbEvent.full(1, 1))
 
     equal(SES.isReceived(), false)
   })
