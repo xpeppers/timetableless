@@ -8,7 +8,7 @@ const stubLog = () => {}
 
 describe('DeleteRegistrationAction', () => {
   it('registration not present', async () => {
-    const registrationRepository = new RegistrationRepository()
+    const registrationRepository = new RegistrationRepository(stubLog)
     const repository = mock(registrationRepository)
 
     repository.expects('exists').withArgs('4640', '10:00').returns(Promise.resolve(false)).once()
@@ -20,7 +20,7 @@ describe('DeleteRegistrationAction', () => {
   })
 
   it('deletes a registration', async () => {
-    const registrationRepository = new RegistrationRepository()
+    const registrationRepository = new RegistrationRepository(stubLog)
     const repository = mock(registrationRepository)
 
     repository.expects('exists').withArgs('4640', '10:00').returns(Promise.resolve(true)).once()

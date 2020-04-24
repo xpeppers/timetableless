@@ -5,9 +5,9 @@ const { UpdateDelayAction } = require("../../lib/updateDelayAction")
 const { RegistrationRepository } = require('../../lib/registrationRepository')
 const { Trenitalia } = require('../../lib/trenitalia')
 
-const registrationRepository = new RegistrationRepository()
-const trenitalia = new Trenitalia()
 const stubLogger = () => {}
+const registrationRepository = new RegistrationRepository(stubLogger)
+const trenitalia = new Trenitalia()
 
 describe('UpdateDelayAction', () => {
   it('update delay when delay is changed', async () => {

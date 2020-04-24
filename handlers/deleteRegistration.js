@@ -31,7 +31,7 @@ function error(err) {
 module.exports.handler = async (event) => {
   try {
     const token = Token.decode(event.pathParameters.token)
-    const action = new DeleteRegistrationAction(new RegistrationRepository(), console.log, console.error)
+    const action = new DeleteRegistrationAction(new RegistrationRepository(console.error), console.log, console.error)
 
     let body = await action.execute(token.trainNumber, token.timeSlot, token.email)
 

@@ -9,7 +9,7 @@ const stubLog = () => {}
 
 describe('AddRegistrationAction', () => {
   it('creates a new registration', async () => {
-    const registrationRepository = new RegistrationRepository()
+    const registrationRepository = new RegistrationRepository(stubLog)
     const trenitalia = new Trenitalia()
     const repository = mock(registrationRepository)
     const trenitaliaService = mock(trenitalia)
@@ -24,7 +24,7 @@ describe('AddRegistrationAction', () => {
   })
 
   it('update an already existing registration', async () => {
-    const registrationRepository = new RegistrationRepository()
+    const registrationRepository = new RegistrationRepository(stubLog)
     const trenitalia = new Trenitalia()
     const repository = mock(registrationRepository)
     const trenitaliaService = mock(trenitalia)
@@ -39,7 +39,7 @@ describe('AddRegistrationAction', () => {
   })
 
   it('respond with an error when train not found', async () => {
-    const registrationRepository = new RegistrationRepository()
+    const registrationRepository = new RegistrationRepository(stubLog)
     const trenitalia = new Trenitalia()
     const repository = mock(registrationRepository)
     const trenitaliaService = mock(trenitalia)

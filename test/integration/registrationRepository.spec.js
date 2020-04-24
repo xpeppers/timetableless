@@ -3,10 +3,13 @@ const { DynamoDbClientBuilder } = require("../../lib/dynamoDbClientBuilder")
 const { RegistrationRepository } = require("../../lib/registrationRepository")
 const { TestingDB } = require("../utils/testingDB")
 const localClient = new DynamoDbClientBuilder(true).build()
+const wrongClient = new DynamoDbClientBuilder(false).build()
 const DB = new TestingDB(localClient)
+const stubLog = () => {}
 
 describe('RegistrationRepository', () => {
-  const repository = new RegistrationRepository(localClient)
+  const repository = new RegistrationRepository(stubLog, localClient)
+  const wrongRepo = new RegistrationRepository(stubLog, wrongClient)
 
   beforeEach(async () => {
     await DB.cleanUp()
@@ -19,6 +22,16 @@ describe('RegistrationRepository', () => {
 
     equal(expectedRegistrations.length, 1)
     equal(created, expectedRegistrations[0])
+  })
+
+  it('cannot create, client not configured', (done) => {
+    wrongRepo.create({ timeSlot: "00:02", trainNumber: "002", departureStation: "S002", delay: 2, peopleToNotify: ["pe@op.lee"], departureTime: "00:02:22" })
+      .then(() => "Should throws an error, but was not thrown")
+      .catch(e => {
+        equal(e.message, "Missing region in config")
+      })
+      .then(done)
+      .catch(done)
   })
 
   it('findAll', async () => {
@@ -35,20 +48,23 @@ describe('RegistrationRepository', () => {
   it('updateDelay', async () => {
     await repository.create({ timeSlot: "00:02", trainNumber: "002", departureStation: "S002", delay: 2, peopleToNotify: ["pe@op.le"], departureTime: "00:02:22" })
 
-    let updatedRegistration = await repository.updateDelay({
-      trainNumber: "002",
-      departureStation: "S002",
-      peopleToNotify: ["pe@op.le"],
-      timeSlot: "00:02",
-      departureTime: "00:02:22",
-      delay: 2
-    }, 99)
+    let updatedRegistration = await repository.updateDelay({ trainNumber: "002", departureStation: "S002", peopleToNotify: ["pe@op.le"], timeSlot: "00:02", departureTime: "00:02:22", delay: 2 }, 99)
 
     let registrations = await DB.scanRecords()
 
     equal(registrations.length, 1)
     equal(registrations[0].delay, 99)
     equal(updatedRegistration, registrations[0])
+  })
+
+  it('cannot updateDelay, client not configured', (done) => {
+    wrongRepo.updateDelay({ trainNumber: "002", departureStation: "S002", peopleToNotify: ["pe@op.le"], timeSlot: "00:02", departureTime: "00:02:22", delay: 2 }, 99)
+      .then(() => "Should throws an error, but was not thrown")
+      .catch(e => {
+        equal(e.message, "Missing region in config")
+      })
+      .then(done)
+      .catch(done)
   })
 
   it('exists', async () => {
@@ -65,6 +81,16 @@ describe('RegistrationRepository', () => {
     equal(exists, false)
   })
 
+  it('cannot check if exists, client not configured', (done) => {
+    wrongRepo.exists("002", "00:02")
+      .then(() => "Should throws an error, but was not thrown")
+      .catch(e => {
+        equal(e.message, "Missing region in config")
+      })
+      .then(done)
+      .catch(done)
+  })
+
   it('addPersonToNotify', async () => {
     await repository.create({ timeSlot: "00:02", trainNumber: "002", departureStation: "S002", delay: 0, peopleToNotify: ["pe@op.le"], departureTime: "00:02:22" })
 
@@ -74,6 +100,16 @@ describe('RegistrationRepository', () => {
 
     equal(expectedRegistrations.length, 1)
     equal(expectedRegistrations[0].peopleToNotify, ["pe@op.le", "person@add.ed"])
+  })
+
+  it('cannot addPersonToNotify', (done) => {
+    wrongRepo.addPersonToNotify("002", "00:02", "person@add.ed")
+      .then(() => "Should throws an error, but was not thrown")
+      .catch(e => {
+        equal(e.message, "Missing region in config")
+      })
+      .then(done)
+      .catch(done)
   })
 
   it('delete registration with single user', async () => {
@@ -93,5 +129,15 @@ describe('RegistrationRepository', () => {
     let afterDelete = await DB.scanRecords()
     equal(afterDelete.length, 1)
     equal(afterDelete[0].peopleToNotify, ['another@user.com'])
+  })
+
+  it('cannot delete', (done) => {
+    wrongRepo.delete("002", "00:02", "pe@op.le")
+      .then(() => "Should throws an error, but was not thrown")
+      .catch(e => {
+        equal(e.message, "Missing region in config")
+      })
+      .then(done)
+      .catch(done)
   })
 })
