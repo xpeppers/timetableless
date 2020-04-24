@@ -1,10 +1,10 @@
 'use strict'
 
 const { mock, match } = require('sinon')
-const { NotifyDelayAction } = require("../lib/notifyDelayAction")
-const { EmailNotifier } = require("../lib/emailNotifier")
-const { Token } = require("../lib/token")
-const { Trenitalia } = require('../lib/trenitalia')
+const { NotifyDelayAction } = require("../../lib/notifyDelayAction")
+const { EmailNotifier } = require("../../lib/emailNotifier")
+const { Token } = require("../../lib/token")
+const { Trenitalia } = require('../../lib/trenitalia')
 const stubLogger = () => {}
 
 describe('NotifyDelayAction', () => {

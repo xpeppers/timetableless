@@ -9,9 +9,12 @@ start_ses_local () {
 stop_ses_local () {
   if [ "$1" == "--exec" ]
   then
-    # in this case we don't have a ctrl+C exit command, so we have to close ses_local manually
-    echo "Halting SES Local"
-    kill $SES_LOCAL_PID
+    COUNT=`ps ax | grep -v grep | grep $SES_LOCAL_PID -c`
+    if [ "$COUNT" != "0" ]
+    then
+      echo "Halting SES Local"
+      kill $SES_LOCAL_PID
+    fi
   fi
 }
 

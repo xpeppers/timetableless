@@ -2,8 +2,8 @@
 
 const { equal } = require('assert')
 const { mock } = require('sinon')
-const { DeleteRegistrationAction } = require("../lib/deleteRegistrationAction")
-const { RegistrationRepository } = require("../lib/registrationRepository")
+const { DeleteRegistrationAction } = require("../../lib/deleteRegistrationAction")
+const { RegistrationRepository } = require("../../lib/registrationRepository")
 const stubLog = () => {}
 
 describe('DeleteRegistrationAction', () => {

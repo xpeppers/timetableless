@@ -17,10 +17,10 @@
     "start": "./scripts/start.sh",
     "start:client": "sh -c 'cd client && npm start && cd -'",
     "test": "npm run test:unit && npm run test:integration",
-    "test:all": "npm start -- --exec 'mocha test'",
-    "test:acceptance": "npm start -- --exec 'mocha test/acceptance/**/*'",
-    "test:integration": "npm start -- --exec 'mocha test/integration/**/*'",
-    "test:unit": "mocha test/** --exclude test/acceptance/**/* --exclude test/integration/**/*"
+    "test:all": "npm start -- --exec 'mocha test/**/*.spec.js'",
+    "test:acceptance": "npm start -- --exec 'mocha test/acceptance/**/*.spec.js'",
+    "test:integration": "npm start -- --exec 'mocha test/integration/**/*.spec.js'",
+    "test:unit": "mocha test/unit/**/*.spec.js"
   },
   "repository": {
     "type": "git",

@@ -2,9 +2,9 @@
 
 const { deepEqual: equal } = require('assert')
 const { mock } = require('sinon')
-const { AddRegistrationAction } = require("../lib/addRegistrationAction")
-const { RegistrationRepository } = require("../lib/registrationRepository")
-const { Trenitalia } = require("../lib/trenitalia")
+const { AddRegistrationAction } = require("../../lib/addRegistrationAction")
+const { RegistrationRepository } = require("../../lib/registrationRepository")
+const { Trenitalia } = require("../../lib/trenitalia")
 const stubLog = () => {}
 
 describe('AddRegistrationAction', () => {

@@ -1,7 +1,7 @@
 'use strict'
 
 const { deepEqual } = require("assert")
-const { forEach, flatArray, flatObjectByAttribute } = require("../lib/asyncHelper")
+const { forEach, flatArray, flatObjectByAttribute } = require("../../lib/asyncHelper")
 
 describe('Async Helper', () => {
   it('forEach', () => {

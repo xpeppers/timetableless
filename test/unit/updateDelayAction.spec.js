@@ -1,9 +1,9 @@
 'use strict'
 
 const { mock } = require('sinon')
-const { UpdateDelayAction } = require("../lib/updateDelayAction")
-const { RegistrationRepository } = require('../lib/registrationRepository')
-const { Trenitalia } = require('../lib/trenitalia')
+const { UpdateDelayAction } = require("../../lib/updateDelayAction")
+const { RegistrationRepository } = require('../../lib/registrationRepository')
+const { Trenitalia } = require('../../lib/trenitalia')
 
 const registrationRepository = new RegistrationRepository()
 const trenitalia = new Trenitalia()

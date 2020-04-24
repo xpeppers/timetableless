@@ -1,5 +1,5 @@
 const { deepEqual } = require("assert")
-const { from } = require("../lib/timeSlots")
+const { from } = require("../../lib/timeSlots")
 
 describe('timeSlots', () => {
   it('returns array of slots in a 10 minutes range', () => {

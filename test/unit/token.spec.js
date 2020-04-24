@@ -1,7 +1,7 @@
 'use strict'
 
 const { equal } = require('assert')
-const { Token } = require('../lib/token')
+const { Token } = require('../../lib/token')
 
 describe('Token', () => {
   it('decodes token', () => {

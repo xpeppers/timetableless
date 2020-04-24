@@ -1,7 +1,7 @@
 'use strict'
 
 const { equal } = require("assert")
-const { AddRegistrationEvent } = require("../lib/addRegistrationEvent")
+const { AddRegistrationEvent } = require("../../lib/addRegistrationEvent")
 const stubLog = () => {}
 
 describe('Registration Event', () => {
