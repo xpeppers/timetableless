@@ -19,4 +19,18 @@ describe('Trenitalia', function () {
 
     equal(departureTime.toISOString().split('T')[1], `05:21:00.000Z`)
   })
+
+  it('train-station info', async () => {
+    let trenitalia = new Trenitalia()
+    let info = await trenitalia.trainStationInfo('4640', 'S00460')
+
+    deepEqual(info, { trainName: '4640 - TORINO STURA', stationName: 'BALDICHIERI'})
+  })
+
+  it('autocomplete station', async () => {
+    let trenitalia = new Trenitalia()
+    let info = await trenitalia.autocompleteStation('BALDICH')
+
+    equal(info, 'BALDICHIERI|S00460\n')
+  })
 })
