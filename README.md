@@ -3,6 +3,8 @@
 A delay tracker for trains in Italy.
 Powered by Serverless framework.
 
+Built as part of our study on serverless applications development.
+
 DEMO: [development](http://timetableless-dev.s3-website-eu-west-1.amazonaws.com/) , [production](http://timetableless-pro.s3-website-eu-west-1.amazonaws.com/)
 
 ---
