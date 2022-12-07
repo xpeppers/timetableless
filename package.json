@@ -37,7 +37,7 @@
     "aws-ses-local": "^1.3.0",
     "mocha": "^7.0.1",
     "nyc": "^15.0.1",
-    "serverless": "^1.63.0",
+    "serverless": "^3.25.1",
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^5.12.1",
     "sinon": "^9.0.0"
